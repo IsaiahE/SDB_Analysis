@@ -52,12 +52,12 @@ def main(constants):
     solution = integrate.odeint(model, s_0, time)
 
     # Form Solutions
-    r = solution[:, 0]
-    theta = solution[:, 1]
-    phi = solution[:, 2]
-    v = solution[:, 3]
-    omega_theta = solution[:, 4]
-    omega_phi = solution[:, 5]
+    r_s = solution[:, 0]
+    theta_s = solution[:, 1]
+    phi_s = solution[:, 2]
+    v_s = solution[:, 3]
+    omega_theta_s = solution[:, 4]
+    omega_phi_s = solution[:, 5]
 
 
     # Analysis
@@ -114,17 +114,17 @@ def main(constants):
     if plot_solutions:
         # Graph Projections of all Trajectories (ax1, ax2, ax3, ax4, ax5, ax6)
         f, axs = plt.subplots(2, 3)
-        axs[0, 0].plot(time, r, 's', markersize=1)
+        axs[0, 0].plot(time, r_s, 's', markersize=1)
         axs[0, 0].set_title('Radius')
-        axs[0, 1].plot(time, theta, 's', markersize=1)
+        axs[0, 1].plot(time, theta_s, 's', markersize=1)
         axs[0, 1].set_title('Theta')
-        axs[1, 0].plot(time, phi, 's', markersize=1)
-        axs[1, 0].set_title('Phi')
-        axs[1, 1].plot(time, v, 's', markersize=1)
-        axs[1, 1].set_title('Radial Velocity')
-        axs[0, 2].plot(time, omega_theta, 's', markersize=1)
-        axs[0, 2].set_title('Omega Theta')
-        axs[1, 2].plot(time, omega_phi, 's', markersize=1)
+        axs[0, 2].plot(time, phi_s, 's', markersize=1)
+        axs[0, 2].set_title('Phi')
+        axs[1, 0].plot(time, v_s, 's', markersize=1)
+        axs[1, 0].set_title('Radial Velocity')
+        axs[1, 1].plot(time, omega_theta_s, 's', markersize=1)
+        axs[1, 1].set_title('Omega Theta')
+        axs[1, 2].plot(time, omega_phi_s, 's', markersize=1)
         axs[1, 2].set_title('Omega Phi')
 
 
@@ -132,11 +132,13 @@ def main(constants):
         plt.show()
 
 
+# TODO - Find the sweet spot for the initial values and constants below. This will be where the interesting stuff 
+#  happens most often. Then we can itterate around these values more precisesly.
 if __name__ == '__main__':
-    constants = {'Energy': .1,'inital_radius': .1, 'initial_theta': .1, 'initial_phi': .1, 'initial_velocity': .1,
+    constants = {'Energy': .1, 'inital_radius': .1, 'initial_theta': .1, 'initial_phi': .1, 'initial_velocity': .1,
                  'initial_omega_theta': .1, 'initial_omega_phi': .1, 'EM Force': .1, 'Coupling Constant': .1,
                  'Reduced Mass': .1, 'Equilibrium Radius': .1}
 
-    for radius in range(0, 150):
+    for radius in range(1, 150):
         constants['inital_radius'] = radius
         main(constants)

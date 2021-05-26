@@ -5,7 +5,7 @@ from matplotlib import rc
 import random as random
 import pandas
 import time
-
+import os
 
 # Isaiah Ertel Andre Suzanne
 # Updated 11:30 a.m. 5/19/2021
@@ -30,11 +30,23 @@ def main(constants):
     omega_phi_0 = constants['initial_omega_phi']
     # Forces
     D_theta = constants['EM_Force']
+    alpha = 1
+    beta = 1
+    gamma = 1
     # Constants
     k = constants['Spring_Constant']
     mu = constants['Reduced_Mass']
     r_e = constants['Equilibrium_Radius']  # Equalibrium Point
 
+
+    def velocity_friction1(r_f, v):
+        pass
+
+    def velocity_friction2(r_f, o_t):
+        pass
+
+    def velocity_friction3(r_f, o_p):
+        pass
 
     # Defines our model using the State Space Flow Equations
     def model(s, t):
@@ -47,7 +59,6 @@ def main(constants):
         domega_phi = -2 * omega_theta * omega_phi / np.tan(theta) - 2 * v * omega_phi / r
         return [dr, dtheta, dphi, dv, domega_theta, domega_phi]
 
-
     # Solve ODE
     s_0 = [r_0, theta_0, phi_0, v_0, omega_theta_0, omega_phi_0]
     time = np.linspace(0, 100, 100000)
@@ -56,7 +67,7 @@ def main(constants):
     # Form Solutions
     r_s = solution[:, 0]
     theta_s = solution[:, 1]
-    phi_s = np.mod(solution[:, 2], 2*np.pi)
+    phi_s = np.mod(solution[:, 2], 2 * np.pi)
     v_s = solution[:, 3]
     omega_theta_s = solution[:, 4]
     omega_phi_s = solution[:, 5]
@@ -96,10 +107,8 @@ def main(constants):
         near_zero_df = near_zero_df.transpose()
         return near_zero_df
 
-
     def check_slope(variable1, variable2):
         check_slope_threshold = .1
-        # TODO - This also?!?!?!?!?!?!?!??!?!?!?!?!?!?!??!?!?!?!??!?!?!??!?!?!?!?!??!?!?!?HUHHHHHH?!?!?!??!?!?
         derivative = np.diff(variable2) / np.diff(variable1)
         validSlope = False
         count = 0
@@ -111,26 +120,27 @@ def main(constants):
             else:
                 count = 0
 
-            if count >= 20000:
+            if count >= 10000:
                 validSlope = True
                 break
 
         return validSlope
 
-
-
     # The Graphing will be performed only if a specific behavior from functions below
     plot_solutions = False
     fixed_points_df = check_fixed_point(solution)
     if fixed_points_df.count()['TimeR'] != 0 and fixed_points_df.count()['TimeT'] != 0:
-        if check_slope(r_s, theta_s):
-            plot_solutions = True
+        plot_solutions = True
+        #if check_slope(r_s, theta_s):
+        #    plot_solutions = True
     if fixed_points_df.count()['TimeR'] != 0 and fixed_points_df.count()['TimeP'] != 0:
-        if check_slope(r_s, phi_s):
-            plot_solutions = True
+        plot_solutions = True
+        #if check_slope(r_s, phi_s):
+        #    plot_solutions = True
     if fixed_points_df.count()['TimeT'] != 0 and fixed_points_df.count()['TimeP'] != 0:
-        if check_slope(theta_s, phi_s):
-            plot_solutions = True
+        plot_solutions = True
+        #if check_slope(theta_s, phi_s):
+        #    plot_solutions = True
 
     if plot_solutions:
         # Graph Projections of all Trajectories (ax1, ax2, ax3, ax4, ax5, ax6)
@@ -163,28 +173,55 @@ def main(constants):
         print(constants)
         stringy = ''
         for key in constants.keys():
-            stringy += str(key) + '_' + str(constants[key]) + '_'
+            stringy += str(key)[:3] + str(key)[-3:] + '_' + str(constants[key]) + '_'
         print(stringy)
         # Show Plot after Loop is finished
-        plt.show()
-        save_plots = ''
-        save_plots = input('Save Plots?',)
+        # plt.show()
+        # save_plots = input('Save Plots?', )
+        save_plots = 'yes'
         if save_plots == 'yes':
+            # Create a directory to hold each set of plots
+            path = r'C:\Users\isaia\OneDrive\Desktop\Dynamics Project\InterestingPlots' + '\\' + str(stringy)
+            if not os.path.exists(path):
+                os.makedirs(path)
+            # Path for plot placing
+            fig_path = path[49:]
+            # Permute through all possible Graphs (r, phi, theta, v, o_phi, o_theta)
+            positions = [r_s, phi_s, theta_s]
+            velocities = [v_s, omega_phi_s, omega_theta_s]
+            positions_names = [r'$r$', r'$\phi$', r'$\theta$']
+            velocities_names = [r'$v_r$', r'$\omega_\phi$', r'$\omega_\theta$']
+            # Adjusting the font size of the plots
+            parameters = {'axes.labelsize': 18, 'axes.titlesize': 25}
+            plt.rcParams.update(parameters)
             plt.figure()
-            plt.plot(r_s, v_s, 's', markersize=1)
-            plt.title(r'$r$' + '  vs  ' + r'$v_r$')
-            plt.savefig('InterestingPlots/' + stringy + 'rv' + '.png')
-            plt.close()
-            plt.figure()
-            plt.plot(theta_s, omega_theta_s, 's', markersize=1)
-            plt.title(r'$\theta$' + '  vs  ' + r'$\omega_\theta$')
-            plt.savefig('InterestingPlots/' + stringy + 'to' + '.png')
-            plt.close()
-            plt.figure()
-            plt.plot(phi_s, omega_phi_s, 's', markersize=1)
-            plt.title(r'$\phi$' + '  vs  ' + r'$\omega_\phi$')
-            plt.savefig('InterestingPlots/' + stringy + 'po' + '.png')
-            plt.close()
+            for index1 in [0, 1, 2]:
+                for index2 in [0, 1, 2]:
+                    if index1 < index2:
+                        # Position vs Position Plots
+                        plt.plot(positions[index1], positions[index2], 's', markersize=1)
+                        plt.title(positions_names[index1] + '  vs  ' + positions_names[index2])
+                        plt.xlabel(positions_names[index1])
+                        plt.ylabel(positions_names[index2])
+                        plt.savefig(fig_path + '\\positions' + str(index1) + str(index2) + '.png', dpi = 300)
+                        plt.clf()
+
+                        # Velocity vs Velocity Plots
+                        plt.plot(velocities[index1], velocities[index2], 's', markersize=1)
+                        plt.title(velocities_names[index1] + '  vs  ' + velocities_names[index2])
+                        plt.xlabel(velocities_names[index1])
+                        plt.ylabel(velocities_names[index2])
+                        plt.savefig(fig_path + '\\velocities' + str(index1) + str(index2) + '.png', dpi = 300)
+                        plt.clf()
+
+                    if index1 == index2:
+                        # Position vs Velocity Plots
+                        plt.plot(positions[index1], velocities[index2], 's', markersize=1)
+                        plt.title(positions_names[index1] + '  vs  ' + velocities_names[index2])
+                        plt.xlabel(positions_names[index1])
+                        plt.ylabel(velocities_names[index2])
+                        plt.savefig(fig_path + '\\statespaces' + str(index1) + str(index2) + '.png', dpi = 300)
+                        plt.clf()
 
 
 # TODO - Find the sweet spot for the initial values and constants below. This will be where the interesting stuff
@@ -194,8 +231,12 @@ if __name__ == '__main__':
                  'initial_omega_theta': 0, 'initial_omega_phi': 20, 'EM_Force': .1, 'Spring_Constant': 2,
                  'Reduced_Mass': 1, 'Equilibrium_Radius': 10}
 
-    for s in range(1, 150):
-        constants['Spring_Constant'] = s
-        for D in range(1, 150):
-            constants['EM_Force'] = D
-            main(constants)
+    for er in range(1, 11, 9):
+        constants['Equilibrium_Radius'] = er
+        for s in range(1, 11, 9):
+            constants['Spring_Constant'] = s
+            for D in range(1, 51, 49):
+                constants['EM_Force'] = D
+                main(constants)
+                if D % 25 == 0 and s % 25 == 0:
+                    print(D, s, er)

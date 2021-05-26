@@ -8,7 +8,7 @@ import time
 import os
 
 # Isaiah Ertel Andre Suzanne
-# Updated 11:30 a.m. 5/19/2021
+# Updated 3:30 a.m. 5/26/2021
 # State Space for the Spinning dumbbell with spring connection
 
 start = time.time()

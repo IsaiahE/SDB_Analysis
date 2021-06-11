@@ -3,7 +3,7 @@ from scipy import integrate
 from matplotlib import pyplot as plt
 from matplotlib import rc
 import random as random
-import pandas
+import pandas as pd
 import time
 import os
 
@@ -72,6 +72,7 @@ def main(constants):
     omega_theta_s = solution[:, 4]
     omega_phi_s = solution[:, 5]
 
+
     # Analysis
     # Check Energy during the orbit
     # Check for fixed points
@@ -103,7 +104,7 @@ def main(constants):
                 temp_dictionary['Omega_Phi'].append(total_solution[:, 5][i])
 
         # Creates and returns a Pandas DataFrame to make data manipulation easier later
-        near_zero_df = pandas.DataFrame.from_dict(temp_dictionary, orient='index')
+        near_zero_df = pd.DataFrame.from_dict(temp_dictionary, orient='index')
         near_zero_df = near_zero_df.transpose()
         return near_zero_df
 
@@ -190,8 +191,12 @@ def main(constants):
             # Path for plot placing
             # fig_path = path[49:]
             fig_path = path
-            print(path)
-            print(fig_path)
+
+            # Save info for Animation
+            temp_dic = {'r_s': r_s, 'theta_s': theta_s, 'phi_s': phi_s}
+            animation_data = pd.DataFrame(temp_dic)
+            animation_data.to_csv(path + '\\' + 'AnimationData.csv')
+
             # Permute through all possible Graphs (r, phi, theta, v, o_phi, o_theta)
             positions = [r_s, phi_s, theta_s]
             velocities = [v_s, omega_phi_s, omega_theta_s]
@@ -235,11 +240,11 @@ def main(constants):
 if __name__ == '__main__':
     constants = {'Energy': .1, 'inital_radius': 16, 'initial_theta': 1.5, 'initial_phi': 0, 'initial_velocity': 0,
                  'initial_omega_theta': 0, 'initial_omega_phi': 20, 'EM_Force': 10, 'Spring_Constant': 2,
-                 'Reduced_Mass': 1, 'Equilibrium_Radius': 10, 'Friction Constant': .1}
+                 'Reduced_Mass': 1, 'Equilibrium_Radius': 10, 'Friction Constant': 0}
 
-    main(constants)
+    # main(constants)
 
-    """
+    
     for er in range(1, 11, 9):
         constants['Equilibrium_Radius'] = er
         for s in range(1, 11, 9):
@@ -249,4 +254,3 @@ if __name__ == '__main__':
                 main(constants)
                 if D % 25 == 0 and s % 25 == 0:
                     print(D, s, er)
-    """

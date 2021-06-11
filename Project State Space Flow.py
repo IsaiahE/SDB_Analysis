@@ -37,16 +37,16 @@ def main(constants):
     k = constants['Spring_Constant']
     mu = constants['Reduced_Mass']
     r_e = constants['Equilibrium_Radius']  # Equalibrium Point
+    fric = constants['Friction Constant']
 
+    def velocity_friction1(friction_const, v):
+        return friction_const * v ** 2
 
-    def velocity_friction1(r_f, v):
-        pass
+    def velocity_friction2(friction_const, o_t, r):
+        return friction_const * o_t ** 2 * r ** 3
 
-    def velocity_friction2(r_f, o_t):
-        pass
-
-    def velocity_friction3(r_f, o_p):
-        pass
+    def velocity_friction3(friction_const, o_p, r):
+        return friction_const * o_p ** 2 * r ** 3
 
     # Defines our model using the State Space Flow Equations
     def model(s, t):
@@ -54,9 +54,9 @@ def main(constants):
         dr = v
         dtheta = omega_theta
         dphi = omega_phi
-        dv = r * omega_theta ** 2 + r * np.sin(theta) ** 2 * omega_phi ** 2 - 2 * k * (r - r_e) / mu
-        domega_theta = np.sin(theta) * np.cos(theta) * omega_phi ** 2 - 2 * v * omega_theta / r + D_theta / r
-        domega_phi = -2 * omega_theta * omega_phi / np.tan(theta) - 2 * v * omega_phi / r
+        dv = r * omega_theta ** 2 + r * np.sin(theta) ** 2 * omega_phi ** 2 - 2 * k * (r - r_e) / mu - velocity_friction1(fric, v) / mu
+        domega_theta = np.sin(theta) * np.cos(theta) * omega_phi ** 2 - 2 * v * omega_theta / r + D_theta / (r ** 2 * mu) - velocity_friction2(fric, omega_theta, r) / (r ** 2 * mu)
+        domega_phi = -2 * omega_theta * omega_phi / np.tan(theta) - 2 * v * omega_phi / r - velocity_friction3(fric, omega_phi, r) / (r ** 2 * mu)
         return [dr, dtheta, dphi, dv, domega_theta, domega_phi]
 
     # Solve ODE
@@ -107,6 +107,7 @@ def main(constants):
         near_zero_df = near_zero_df.transpose()
         return near_zero_df
 
+    # Currently not being used
     def check_slope(variable1, variable2):
         check_slope_threshold = .1
         derivative = np.diff(variable2) / np.diff(variable1)
@@ -125,6 +126,8 @@ def main(constants):
                 break
 
         return validSlope
+
+    # Need to make a function that checks for 
 
     # The Graphing will be performed only if a specific behavior from functions below
     plot_solutions = False
@@ -181,11 +184,14 @@ def main(constants):
         save_plots = 'yes'
         if save_plots == 'yes':
             # Create a directory to hold each set of plots
-            path = r'C:\Users\isaia\OneDrive\Desktop\Dynamics Project\InterestingPlots' + '\\' + str(stringy)
+            path = r'C:\Users\isaia\OneDrive - purdue.edu\Spinning Dumbbell Analysis' + '\\' + str(stringy)
             if not os.path.exists(path):
                 os.makedirs(path)
             # Path for plot placing
-            fig_path = path[49:]
+            # fig_path = path[49:]
+            fig_path = path
+            print(path)
+            print(fig_path)
             # Permute through all possible Graphs (r, phi, theta, v, o_phi, o_theta)
             positions = [r_s, phi_s, theta_s]
             velocities = [v_s, omega_phi_s, omega_theta_s]
@@ -228,9 +234,12 @@ def main(constants):
 #  happens most often. Then we can itterate around these values more precisesly.
 if __name__ == '__main__':
     constants = {'Energy': .1, 'inital_radius': 16, 'initial_theta': 1.5, 'initial_phi': 0, 'initial_velocity': 0,
-                 'initial_omega_theta': 0, 'initial_omega_phi': 20, 'EM_Force': .1, 'Spring_Constant': 2,
-                 'Reduced_Mass': 1, 'Equilibrium_Radius': 10}
+                 'initial_omega_theta': 0, 'initial_omega_phi': 20, 'EM_Force': 10, 'Spring_Constant': 2,
+                 'Reduced_Mass': 1, 'Equilibrium_Radius': 10, 'Friction Constant': .1}
 
+    main(constants)
+
+    """
     for er in range(1, 11, 9):
         constants['Equilibrium_Radius'] = er
         for s in range(1, 11, 9):
@@ -240,3 +249,4 @@ if __name__ == '__main__':
                 main(constants)
                 if D % 25 == 0 and s % 25 == 0:
                     print(D, s, er)
+    """

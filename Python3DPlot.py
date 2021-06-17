@@ -1,28 +1,36 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import os
+
 
 # Plots in 3 dimensions to more easily look for interesting behavior
-fig = plt.figure()
-ax = fig.add_subplot(projection='3d')
+for file in os.listdir(r'C:\Users\isaia\OneDrive - purdue.edu\Spinning Dumbbell Analysis'):
 
-csv_filename = 'AnimationData.csv'
-path = r'C:\Users\isaia\OneDrive - purdue.edu\Spinning Dumbbell Analysis\Energy_0.1_iniius_16_inieta_1.5_iniphi_0_iniity_0_inieta_0_iniphi_20_EM_rce_1_Sprant_1_Redass_1_Equius_1_Friant_0_'
-positionData_df = pd.read_csv(path + '\\' + csv_filename)
-positionData_df.pop('Unnamed: 0')
+    try:
+        fig = plt.figure()
+        ax = fig.add_subplot(projection='3d')
 
-r = positionData_df['r_s'].tolist()
-theta = positionData_df['theta_s'].tolist()
-phi = positionData_df['phi_s'].tolist()
+        csv_filename = 'AnimationData.csv'
+        path = file
+        positionData_df = pd.read_csv(r'C:\Users\isaia\OneDrive - purdue.edu\Spinning Dumbbell Analysis' + '\\' + path + '\\' + csv_filename)
+        positionData_df.pop('Unnamed: 0')
 
-x = []
-y = []
-z = []
+        r = positionData_df['r_s'].tolist()
+        theta = positionData_df['theta_s'].tolist()
+        phi = positionData_df['phi_s'].tolist()
 
-for i in range(len(positionData_df['r_s'].tolist())):
-    x.append(r[i] * np.sin(theta[i]) * np.sin(phi[i]))
-    y.append(r[i] * np.sin(theta[i]) * np.cos(phi[i]))
-    z.append(r[i] * np.cos(theta[i]))
+        x = []
+        y = []
+        z = []
 
-plt.plot(x, y, z)
-plt.show()
+        for i in range(len(positionData_df['r_s'].tolist())):
+            x.append(r[i] * np.sin(theta[i]) * np.sin(phi[i]))
+            y.append(r[i] * np.sin(theta[i]) * np.cos(phi[i]))
+            z.append(r[i] * np.cos(theta[i]))
+
+        plt.plot(x, y, z)
+        plt.show()
+
+    except Exception:
+        print(file)

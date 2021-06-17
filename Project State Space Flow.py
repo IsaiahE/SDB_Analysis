@@ -8,7 +8,7 @@ import time
 import os
 
 # Isaiah Ertel Andre Suzanne
-# Updated 3:30 a.m. 5/26/2021
+# Updated 11:00 6/17/2021
 # State Space for the Spinning dumbbell with spring connection
 
 start = time.time()
@@ -19,25 +19,28 @@ def main(constants):
 
     # Define our constants and starting values
     # Energy
-    E = constants['Energy']
+    # E = constants['Energy'] # Initial Energy (Not currently used)
     # Positions
-    r_0 = constants['inital_radius']
-    theta_0 = constants['initial_theta']
-    phi_0 = constants['initial_phi']
+    r_0 = constants['IR'] # Initial Radius
+    theta_0 = constants['IT'] # Initial Theta
+    phi_0 = constants['IP'] # Initial Phi
     # Velocities
-    v_0 = constants['initial_velocity']
-    omega_theta_0 = constants['initial_omega_theta']
-    omega_phi_0 = constants['initial_omega_phi']
+    v_0 = constants['IV'] # Initial Angular Velocity in Phi
+    omega_theta_0 = constants['IOT'] # Initial Angular Velocity in Phi
+    omega_phi_0 = constants['IOP'] # Initial Angular Velocity in Phi
     # Forces
-    D_theta = constants['EM_Force']
+    D_theta = constants['D'] # Torque producing force
     alpha = 1
     beta = 1
     gamma = 1
     # Constants
-    k = constants['Spring_Constant']
-    mu = constants['Reduced_Mass']
-    r_e = constants['Equilibrium_Radius']  # Equalibrium Point
-    fric = constants['Friction Constant']
+    k = constants['K'] # Spring Constant k
+    m1 = constants['M1'] # Mass of ball 1
+    m2 = constants['M2'] # Mass of ball 2
+    r_e = constants['ER']  # Equalibrium Point
+    fric = constants['FR'] # Friction Constant
+    mu = m1*m2 / (m1 + m2) # Reduced Mass
+
 
     def velocity_friction1(friction_const, v):
         return friction_const * v ** 2
@@ -177,15 +180,23 @@ def main(constants):
         print(constants)
         stringy = ''
         for key in constants.keys():
-            stringy += str(key)[:3] + str(key)[-3:] + '_' + str(constants[key]) + '_'
+            if key == 'Change Var':
+                continue
+            else:
+                stringy += str(key) + '-' + str(constants[key]) + '_'
+        stringy = stringy[:-1]
         print(stringy)
         # Show Plot after Loop is finished
         # plt.show()
         # save_plots = input('Save Plots?', )
         save_plots = 'yes'
         if save_plots == 'yes':
+            # Create a directory for which Variable is being iterated through
+            path_to_folder = r'C:\Users\isaia\OneDrive - purdue.edu\Spinning Dumbbell Analysis' + '\\' + constants['Change Var']
+            if not os.path.exists(path_to_folder):
+                os.makedirs(path_to_folder)
             # Create a directory to hold each set of plots
-            path = r'C:\Users\isaia\OneDrive - purdue.edu\Spinning Dumbbell Analysis' + '\\' + str(stringy)
+            path = path_to_folder + '\\' + str(stringy)
             if not os.path.exists(path):
                 os.makedirs(path)
             # Path for plot placing
@@ -238,19 +249,11 @@ def main(constants):
 # TODO - Find the sweet spot for the initial values and constants below. This will be where the interesting stuff
 #  happens most often. Then we can itterate around these values more precisesly.
 if __name__ == '__main__':
-    constants = {'Energy': .1, 'inital_radius': 16, 'initial_theta': 1.5, 'initial_phi': 0, 'initial_velocity': 0,
-                 'initial_omega_theta': 0, 'initial_omega_phi': 20, 'EM_Force': 10, 'Spring_Constant': 2,
-                 'Reduced_Mass': 1, 'Equilibrium_Radius': 10, 'Friction Constant': 0}
+    constants = {'Change Var': 'ER_1-10', 'IR': 16, 'IT': 1.5, 'IP': 0, 'IV': 0,
+                 'IOT': 0, 'IOP': 20, 'D': 10, 'K': 2,
+                 'ER': 10, 'FR': 0, 'M1': 2, 'M2': 2}
 
-    # main(constants)
-
-    
-    for er in range(1, 11, 9):
-        constants['Equilibrium_Radius'] = er
-        for s in range(1, 11, 9):
-            constants['Spring_Constant'] = s
-            for D in range(1, 51, 49):
-                constants['EM_Force'] = D
-                main(constants)
-                if D % 25 == 0 and s % 25 == 0:
-                    print(D, s, er)
+    constants['Change Var'] = 'ER_1-10'
+    for er in range(1, 11):
+        constants['ER'] = er
+        main(constants)

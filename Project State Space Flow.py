@@ -187,20 +187,19 @@ def main(constants):
         stringy = stringy[:-1]
         print(stringy)
         # Show Plot after Loop is finished
-        # plt.show()
-        # save_plots = input('Save Plots?', )
         save_plots = 'yes'
         if save_plots == 'yes':
             # Create a directory for which Variable is being iterated through
             path_to_folder = r'C:\Users\isaia\OneDrive - purdue.edu\Spinning Dumbbell Analysis' + '\\' + constants['Change Var']
             if not os.path.exists(path_to_folder):
                 os.makedirs(path_to_folder)
+
             # Create a directory to hold each set of plots
             path = path_to_folder + '\\' + str(stringy)
             if not os.path.exists(path):
                 os.makedirs(path)
+
             # Path for plot placing
-            # fig_path = path[49:]
             fig_path = path
 
             # Save info for Animation
@@ -213,6 +212,7 @@ def main(constants):
             velocities = [v_s, omega_phi_s, omega_theta_s]
             positions_names = [r'$r$', r'$\phi$', r'$\theta$']
             velocities_names = [r'$v_r$', r'$\omega_\phi$', r'$\omega_\theta$']
+
             # Adjusting the font size of the plots
             parameters = {'axes.labelsize': 18, 'axes.titlesize': 25}
             plt.rcParams.update(parameters)
@@ -246,14 +246,18 @@ def main(constants):
                         plt.clf()
 
 
-# TODO - Find the sweet spot for the initial values and constants below. This will be where the interesting stuff
-#  happens most often. Then we can itterate around these values more precisesly.
 if __name__ == '__main__':
     constants = {'Change Var': 'ER_1-10', 'IR': 16, 'IT': 1.5, 'IP': 0, 'IV': 0,
                  'IOT': 0, 'IOP': 20, 'D': 10, 'K': 2,
                  'ER': 10, 'FR': 0, 'M1': 2, 'M2': 2}
 
-    constants['Change Var'] = 'ER_1-10'
-    for er in range(1, 11):
-        constants['ER'] = er
-        main(constants)
+
+    var_name_list = ['IR', 'ER', 'K', 'D', 'M1', 'IT']
+    for var_name in var_name_list:
+        start = 1
+        stop = 20
+        constants['Change Var'] = var_name + '_' + str(start) + '-' + str(stop)
+        for i in range(start, stop + 1):
+            constants[str(var_name)] = i
+            main(constants)
+        constants[var_name] = start

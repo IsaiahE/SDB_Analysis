@@ -4,6 +4,10 @@ import numpy as np
 import pandas as pd
 import os
 
+# Isaiah Ertel 
+# Updated 1:26 p.m. 6/17/2021
+# Plots a 3 Dimensional Path of the Spinning Dumbbell
+
 var_name_list = ['IR_1-20', 'ER_1-20', 'K_1-20', 'D_1-20', 'M1_1-20', 'IT_1-20']
 csv_filename = 'AnimationData.csv'
 path_to_folder_dir = r'C:\Users\isaia\OneDrive - purdue.edu\Spinning Dumbbell Analysis'

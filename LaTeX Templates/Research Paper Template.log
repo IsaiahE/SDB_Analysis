@@ -1,57 +1,60 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.6.3)  3 JUN 2021 11:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.6.17)  18 JUN 2021 12:34
 entering extended mode
-**"c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/Research Paper Template.tex"
-(c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/Research Paper Template.tex
-LaTeX2e <2020-10-01> patch level 4
-L3 programming layer <2021-05-27> (C:\Users\isaia\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
-Document Class: article 2020/04/10 v1.4m Standard LaTeX document class
-(C:\Users\isaia\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
-File: size10.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**"c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex"
+(c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex
+LaTeX2e <2021-06-01> patch level 1
+L3 programming layer <2021-06-01> (c:/texlive/2021/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2021/02/12 v1.4n Standard LaTeX document class
+(c:/texlive/2021/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2021/02/12 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count181
-\c@section=\count182
-\c@subsection=\count183
-\c@subsubsection=\count184
-\c@paragraph=\count185
-\c@subparagraph=\count186
-\c@figure=\count187
-\c@table=\count188
+\c@part=\count182
+\c@section=\count183
+\c@subsection=\count184
+\c@subsubsection=\count185
+\c@paragraph=\count186
+\c@subparagraph=\count187
+\c@figure=\count188
+\c@table=\count189
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
 \bibindent=\dimen138
-) (C:\Users\isaia\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
-Package: inputenc 2020/08/01 v1.3d Input encoding file
-\inpenc@prehook=\toks15
-\inpenc@posthook=\toks16
-) (C:\Users\isaia\AppData\Local\Programs\MiKTeX\tex/latex/natbib\natbib.sty
+) (c:/texlive/2021/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks16
+\inpenc@posthook=\toks17
+) (c:/texlive/2021/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip49
 \bibsep=\skip50
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count189
-) (C:\Users\isaia\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
-Package: graphicx 2020/09/09 v1.2b Enhanced LaTeX Graphics (DPC,SPQR)
- (C:\Users\isaia\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+\c@NAT@ctr=\count190
+) (c:/texlive/2021/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2020/12/05 v1.2c Enhanced LaTeX Graphics (DPC,SPQR)
+ (c:/texlive/2021/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks17
-) (C:\Users\isaia\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
-Package: graphics 2020/08/30 v1.4c Standard LaTeX Graphics (DPC,SPQR)
- (C:\Users\isaia\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+\KV@toks@=\toks18
+) (c:/texlive/2021/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+ (c:/texlive/2021/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
-) (C:\Users\isaia\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
+) (c:/texlive/2021/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: pdftex.def on input line 105.
- (C:\Users\isaia\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+Package graphics Info: Driver file: pdftex.def on input line 107.
+ (c:/texlive/2021/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen139
 \Gin@req@width=\dimen140
-) (C:\Users\isaia\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+) (c:/texlive/2021/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2021-05-07 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count190
-\l__pdf_internal_box=\box47
-) (Research Paper Template.aux)
+\l__color_backend_stack_int=\count191
+\l__pdf_internal_box=\box50
+) (./Research Paper Template.aux)
 \openout1 = `"Research Paper Template.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
@@ -68,24 +71,24 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
 LaTeX Font Info:    ... okay on input line 11.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
 LaTeX Font Info:    ... okay on input line 11.
- (C:\Users\isaia\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+ (c:/texlive/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count191
+\scratchcounter=\count192
 \scratchdimen=\dimen141
-\scratchbox=\box48
-\nofMPsegments=\count192
-\nofMParguments=\count193
-\everyMPshowfont=\toks18
-\MPscratchCnt=\count194
+\scratchbox=\box51
+\nofMPsegments=\count193
+\nofMParguments=\count194
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count195
 \MPscratchDim=\dimen142
-\MPnumerator=\count195
-\makeMPintoPDFobject=\count196
-\everyMPtoPDFconversion=\toks19
-) (C:\Users\isaia\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
+\MPnumerator=\count196
+\makeMPintoPDFobject=\count197
+\everyMPtoPDFconversion=\toks20
+) (c:/texlive/2021/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
- (C:\Users\isaia\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+ (c:/texlive/2021/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <12> on input line 13.
@@ -93,21 +96,412 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 13.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 13.
- [1
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 20.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 20.
 
-{C:/Users/isaia/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] (Research Paper Template.aux) ) 
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:21: Display math should end with $$.
+<to be read again> 
+                    
+l.21     $ 
+           \omega\phi - \omega\theta $
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:21: Missing $ inserted.
+<inserted text> 
+                $
+l.21     $ \omega
+                 \phi - \omega\theta $
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:22: You can't use `\eqno' in horizontal mode.
+\endequation ->\eqno 
+                     \hbox {\@eqnnum }$$\@ignoretrue 
+l.22 \end{equation}
+                   
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:22: Missing $ inserted.
+<inserted text> 
+                $
+l.22 \end{equation}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:22: Display math should end with $$.
+<to be read again> 
+                   \endgroup 
+l.22 \end{equation}
+                   
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:25: Display math should end with $$.
+<to be read again> 
+                    
+l.25     $ 
+           \ddot\r = r\theta^2 + rsin^2(\theta)\phi^2 - 2k(r - r_0)/\mu $
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:25: Missing $ inserted.
+<inserted text> 
+                $
+l.25     $ \ddot
+                \r = r\theta^2 + rsin^2(\theta)\phi^2 - 2k(r - r_0)/\mu $
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:25: Missing { inserted.
+<to be read again> 
+                   \begingroup 
+l.25     $ \ddot\r
+                   = r\theta^2 + rsin^2(\theta)\phi^2 - 2k(r - r_0)/\mu $
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+
+LaTeX Warning: Command \r invalid in math mode on input line 25.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:25: Please use \mathaccent for accents in math mode.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \spacefactor ...
+l.25     $ \ddot\r =
+                     r\theta^2 + rsin^2(\theta)\phi^2 - 2k(r - r_0)/\mu $
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:25: You can't use `\spacefactor' in math mode.
+\add@accent ... \accent #1 #2\egroup \spacefactor 
+                                                  \accent@spacefactor 
+l.25     $ \ddot\r =
+                     r\theta^2 + rsin^2(\theta)\phi^2 - 2k(r - r_0)/\mu $
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:25: Missing } inserted.
+<inserted text> 
+                }
+l.25 ...+ rsin^2(\theta)\phi^2 - 2k(r - r_0)/\mu $
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+Missing character: There is no è in font cmex10!
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:26: You can't use `\eqno' in horizontal mode.
+\endequation ->\eqno 
+                     \hbox {\@eqnnum }$$\@ignoretrue 
+l.26 \end{equation}
+                   
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:26: Missing $ inserted.
+<inserted text> 
+                $
+l.26 \end{equation}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:26: Display math should end with $$.
+<to be read again> 
+                   \endgroup 
+l.26 \end{equation}
+                   
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:29: Display math should end with $$.
+<to be read again> 
+                    
+l.29     $ 
+           \ddot\theta = sin(\theta)cos(\theta)\phi^2 - 2\dot\theta\dot\r/r ...
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:29: Missing $ inserted.
+<inserted text> 
+                $
+l.29     $ \ddot
+                \theta = sin(\theta)cos(\theta)\phi^2 - 2\dot\theta\dot\r/r ...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:29: Missing { inserted.
+<to be read again> 
+                   \begingroup 
+l.29 ...heta)cos(\theta)\phi^2 - 2\dot\theta\dot\r
+                                                  /r + D_\theta/r^2 $
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+
+LaTeX Warning: Command \r invalid in math mode on input line 29.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:29: Please use \mathaccent for accents in math mode.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \spacefactor ...
+l.29 ...eta)cos(\theta)\phi^2 - 2\dot\theta\dot\r/
+                                                  r + D_\theta/r^2 $
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:29: You can't use `\spacefactor' in math mode.
+\add@accent ... \accent #1 #2\egroup \spacefactor 
+                                                  \accent@spacefactor 
+l.29 ...eta)cos(\theta)\phi^2 - 2\dot\theta\dot\r/
+                                                  r + D_\theta/r^2 $
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:29: Missing } inserted.
+<inserted text> 
+                }
+l.29 ...i^2 - 2\dot\theta\dot\r/r + D_\theta/r^2 $
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+Missing character: There is no è in font cmex10!
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:30: You can't use `\eqno' in horizontal mode.
+\endequation ->\eqno 
+                     \hbox {\@eqnnum }$$\@ignoretrue 
+l.30 \end{equation}
+                   
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:30: Missing $ inserted.
+<inserted text> 
+                $
+l.30 \end{equation}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:30: Display math should end with $$.
+<to be read again> 
+                   \endgroup 
+l.30 \end{equation}
+                   
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:33: Display math should end with $$.
+<to be read again> 
+                    
+l.33     $ 
+           \ddot\phi = -2\dot\r\dot\phi/r + 2cot(\theta)\dot\theta\dot\phi $
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:33: Missing $ inserted.
+<inserted text> 
+                $
+l.33     $ \ddot
+                \phi = -2\dot\r\dot\phi/r + 2cot(\theta)\dot\theta\dot\phi $
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:33: Missing { inserted.
+<to be read again> 
+                   \begingroup 
+l.33     $ \ddot\phi = -2\dot\r
+                               \dot\phi/r + 2cot(\theta)\dot\theta\dot\phi $
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+
+LaTeX Warning: Command \r invalid in math mode on input line 33.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:33: Missing $ inserted.
+<inserted text> 
+                $
+l.33     $ \ddot\phi = -2\dot\r\dot
+                                   \phi/r + 2cot(\theta)\dot\theta\dot\phi $
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:33: Missing { inserted.
+<to be read again> 
+                   \global 
+l.33     $ \ddot\phi = -2\dot\r\dot
+                                   \phi/r + 2cot(\theta)\dot\theta\dot\phi $
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:33: Improper \spacefactor.
+<recently read> \spacefactor 
+                             
+l.33     $ \ddot\phi = -2\dot\r\dot
+                                   \phi/r + 2cot(\theta)\dot\theta\dot\phi $
+You can refer to \spacefactor only in horizontal mode;
+you can refer to \prevdepth only in vertical mode; and
+neither of these is meaningful inside \write. So
+I'm forgetting what you said and using zero instead.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:33: Please use \mathaccent for accents in math mode.
+\add@accent ... \let \ignorespaces \relax \accent 
+                                                  #1 #2\egroup \spacefactor ...
+l.33     $ \ddot\phi = -2\dot\r\dot
+                                   \phi/r + 2cot(\theta)\dot\theta\dot\phi $
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:33: Missing { inserted.
+<to be read again> 
+                   \mathaccent 
+l.33     $ \ddot\phi = -2\dot\r\dot
+                                   \phi/r + 2cot(\theta)\dot\theta\dot\phi $
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:33: Missing { inserted.
+<to be read again> 
+                   \egroup 
+l.33     $ \ddot\phi = -2\dot\r\dot
+                                   \phi/r + 2cot(\theta)\dot\theta\dot\phi $
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:33: You can't use `\spacefactor' in math mode.
+\add@accent ... \accent #1 #2\egroup \spacefactor 
+                                                  \accent@spacefactor 
+l.33     $ \ddot\phi = -2\dot\r\dot
+                                   \phi/r + 2cot(\theta)\dot\theta\dot\phi $
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:33: Missing } inserted.
+<inserted text> 
+                }
+l.33 ...t\phi/r + 2cot(\theta)\dot\theta\dot\phi $
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:34: You can't use `\eqno' in restricted horizontal mode.
+\endequation ->\eqno 
+                     \hbox {\@eqnnum }$$\@ignoretrue 
+l.34 \end{equation}
+                   
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:34: Missing } inserted.
+<inserted text> 
+                }
+l.34 \end{equation}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:34: Missing } inserted.
+<inserted text> 
+                }
+l.34 \end{equation}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:34: Missing } inserted.
+<inserted text> 
+                }
+l.34 \end{equation}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+c:/Users/isaia/OneDrive/Documents/GitHub/SDB_Analysis/LaTeX Templates/Research Paper Template.tex:34: Missing $ inserted.
+<inserted text> 
+                $
+l.34 \end{equation}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+[1
+
+{c:/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./Research Paper Template.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 1568 strings out of 479081
- 23799 string characters out of 2852598
- 315117 words of memory out of 3000000
- 19300 multiletter control sequences out of 15000+600000
+ 1581 strings out of 478512
+ 23265 string characters out of 5853626
+ 323804 words of memory out of 5000000
+ 19582 multiletter control sequences out of 15000+600000
  407070 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,6n,66p,256b,191s stack positions out of 5000i,500n,10000p,200000b,80000s
-<C:/Users/isaia/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/isaia/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/isaia/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/isaia/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on "Research Paper Template.pdf" (1 page, 52540 bytes).
+ 57i,7n,66p,272b,193s stack positions out of 5000i,500n,10000p,200000b,80000s
+<c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on "Research Paper Template.pdf" (1 page, 89668 bytes).
 PDF statistics:
- 22 PDF objects out of 1000 (max. 8388607)
+ 48 PDF objects out of 1000 (max. 8388607)
+ 28 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

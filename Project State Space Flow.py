@@ -8,11 +8,10 @@ import time
 import os
 
 # Isaiah Ertel Andre Suzanne
-# Updated 11:00 6/17/2021
+# Updated 3:00 p.m. 7/1/2021
 # State Space for the Spinning dumbbell with spring connection
 
 start = time.time()
-
 
 def main(constants):
     # Loop to populate data file with multiple iterations of randomly choosen velocities at fixed energies
@@ -28,11 +27,6 @@ def main(constants):
     v_0 = constants['IV'] # Initial Angular Velocity in Phi
     omega_theta_0 = constants['IOT'] # Initial Angular Velocity in Phi
     omega_phi_0 = constants['IOP'] # Initial Angular Velocity in Phi
-    # Forces
-    D_theta = constants['D'] # Torque producing force
-    alpha = 1
-    beta = 1
-    gamma = 1
     # Constants
     k = constants['K'] # Spring Constant k
     m1 = constants['M1'] # Mass of ball 1
@@ -40,7 +34,11 @@ def main(constants):
     r_e = constants['ER']  # Equalibrium Point
     fric = constants['FR'] # Friction Constant
     mu = m1*m2 / (m1 + m2) # Reduced Mass
-
+    # Forces
+    D_theta = constants['D'] # Torque producing force
+    alpha = fric
+    beta = fric
+    gamma = fric
 
     def velocity_friction1(friction_const, v):
         return friction_const * v ** 2
@@ -51,15 +49,17 @@ def main(constants):
     def velocity_friction3(friction_const, o_p, r):
         return friction_const * o_p ** 2 * r ** 3
 
+    # D_theta function of theta probably
+    
     # Defines our model using the State Space Flow Equations
     def model(s, t):
         r, theta, phi, v, omega_theta, omega_phi = s
         dr = v
         dtheta = omega_theta
         dphi = omega_phi
-        dv = r * omega_theta ** 2 + r * np.sin(theta) ** 2 * omega_phi ** 2 - 2 * k * (r - r_e) / mu - velocity_friction1(fric, v) / mu
-        domega_theta = np.sin(theta) * np.cos(theta) * omega_phi ** 2 - 2 * v * omega_theta / r + D_theta / (r ** 2 * mu) - velocity_friction2(fric, omega_theta, r) / (r ** 2 * mu)
-        domega_phi = -2 * omega_theta * omega_phi / np.tan(theta) - 2 * v * omega_phi / r - velocity_friction3(fric, omega_phi, r) / (r ** 2 * mu)
+        dv = r * omega_theta ** 2 + r * np.sin(theta) ** 2 * omega_phi ** 2 - 2 * k * (r - r_e) / mu - alpha * abs(v) / mu
+        domega_theta = np.sin(theta) * np.cos(theta) * omega_phi ** 2 - 2 * v * omega_theta / r + D_theta / (r ** 2 * mu) - beta * abs(omega_theta) / (r ** 2 * mu)
+        domega_phi = -2 * omega_theta * omega_phi * np.cos(theta) / np.sin(theta) - 2 * v * omega_phi / r - gamma * abs(omega_phi) / (r ** 2 * mu)
         return [dr, dtheta, dphi, dv, domega_theta, domega_phi]
 
     # Solve ODE
@@ -131,8 +131,6 @@ def main(constants):
 
         return validSlope
 
-    # Need to make a function that checks for 
-
     # The Graphing will be performed only if a specific behavior from functions below
     plot_solutions = False
     fixed_points_df = check_fixed_point(solution)
@@ -203,7 +201,7 @@ def main(constants):
             fig_path = path
 
             # Save info for Animation
-            temp_dic = {'r_s': r_s, 'theta_s': theta_s, 'phi_s': phi_s}
+            temp_dic = {'r_s': r_s, 'theta_s': theta_s, 'phi_s': phi_s, 'velocity': v_s, 'omega_theta_s': omega_theta_s, 'omega_phi_s': omega_phi_s,'time': time}
             animation_data = pd.DataFrame(temp_dic)
             animation_data.to_csv(path + '\\' + 'AnimationData.csv')
 
@@ -247,17 +245,18 @@ def main(constants):
 
 
 if __name__ == '__main__':
-    constants = {'Change Var': 'ER_1-10', 'IR': 16, 'IT': 1.5, 'IP': 0, 'IV': 0,
-                 'IOT': 0, 'IOP': 20, 'D': 10, 'K': 2,
-                 'ER': 10, 'FR': 0, 'M1': 2, 'M2': 2}
+    constants = {'Change Var': 'ER_1-10', 
+                'IR': 2, 'IT': 1.5, 'IP': 0, 
+                'IV': 0, 'IOT': 0, 'IOP': 20, 
+                'D': 10, 'K': 2, 'ER': 10, 'FR': .01, 'M1': 2, 'M2': 2}
 
 
-    var_name_list = ['IR', 'ER', 'K', 'D', 'M1', 'IT']
+    var_name_list = ['IT']
     for var_name in var_name_list:
-        start = 1
-        stop = 20
-        constants['Change Var'] = var_name + '_' + str(start) + '-' + str(stop)
+        start = 0
+        stop = 100
+        constants['Change Var'] = var_name + '_' + str(start) + '-' + 'pi'
         for i in range(start, stop + 1):
-            constants[str(var_name)] = i
+            constants[str(var_name)] = np.pi * i/100
             main(constants)
         constants[var_name] = start

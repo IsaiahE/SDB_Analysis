@@ -263,19 +263,20 @@ def main(constants):
                 plt.clf()
 
 if __name__ == '__main__':
-    constants = {'Main Folder Name': 'Varying_Friction', 'DataName': 'FR',
+    constants = {'Main Folder Name': 'Varying_Theta2', 'DataName': 'IT',
                 'IR': 5, 'IT': np.pi / 4, 'IP': 0, 
                 'IV': 0, 'IOT': 0, 'IOP': 1, 
-                'D': 1, 'K': 2, 'ER': 1, 'FR': .01, 'TZ': .1,
+                'D': 1, 'K': 2, 'ER': 1, 'FR': .1, 'TZ': .1,
                 'M1': 2, 'M2': 2,
                 'Settings': [False,          False]}
                           # [Plot Lissajous, Plot Radius and Phi]
 
-    var_name_list = ['FR']
+    var_name_list = ['IT']
     for var_name in var_name_list:
+        constants['DataName'] == var_name
         start = 0
         stop = 100
         for i in range(start, stop + 1):
-            constants[str(var_name)] = i / 100
+            constants[str(var_name)] = np.pi * i / 200
             main(constants)
         constants[var_name] = start

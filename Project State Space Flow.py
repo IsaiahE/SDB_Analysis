@@ -39,6 +39,7 @@ def main(constants):
     alpha = fric
     beta = fric
     gamma = fric
+    torque_z = 1
 
     def velocity_friction1(friction_const, v):
         return friction_const * v ** 2
@@ -59,12 +60,12 @@ def main(constants):
         dphi = omega_phi
         dv = r * omega_theta ** 2 + r * np.sin(theta) ** 2 * omega_phi ** 2 - 2 * k * (r - r_e) / mu - alpha * abs(v) / mu
         domega_theta = np.sin(theta) * np.cos(theta) * omega_phi ** 2 - 2 * v * omega_theta / r + D_theta / (r ** 2 * mu) - beta * abs(omega_theta) / (r ** 2 * mu)
-        domega_phi = -2 * omega_theta * omega_phi * np.cos(theta) / np.sin(theta) - 2 * v * omega_phi / r - gamma * abs(omega_phi) / (r ** 2 * mu)
+        domega_phi = -2 * omega_theta * omega_phi * np.cos(theta) / np.sin(theta) - 2 * v * omega_phi / r - gamma * abs(omega_phi) / (r ** 2 * mu) + torque_z / (mu * r ** 2 * np.sin(theta) ** 2)
         return [dr, dtheta, dphi, dv, domega_theta, domega_phi]
 
     # Solve ODE
     s_0 = [r_0, theta_0, phi_0, v_0, omega_theta_0, omega_phi_0]
-    time = np.linspace(0, 100, 100000)
+    time = np.linspace(0, 1000, 100000)
     solution = integrate.odeint(model, s_0, time)
 
     # Form Solutions
@@ -136,16 +137,10 @@ def main(constants):
     fixed_points_df = check_fixed_point(solution)
     if fixed_points_df.count()['TimeR'] != 0 and fixed_points_df.count()['TimeT'] != 0:
         plot_solutions = True
-        #if check_slope(r_s, theta_s):
-        #    plot_solutions = True
     if fixed_points_df.count()['TimeR'] != 0 and fixed_points_df.count()['TimeP'] != 0:
         plot_solutions = True
-        #if check_slope(r_s, phi_s):
-        #    plot_solutions = True
     if fixed_points_df.count()['TimeT'] != 0 and fixed_points_df.count()['TimeP'] != 0:
         plot_solutions = True
-        #if check_slope(theta_s, phi_s):
-        #    plot_solutions = True
 
     if plot_solutions:
         # Graph Projections of all Trajectories (ax1, ax2, ax3, ax4, ax5, ax6)
@@ -180,6 +175,8 @@ def main(constants):
         for key in constants.keys():
             if key == 'Change Var':
                 continue
+            if key == 'Direct Name':
+                continue
             else:
                 stringy += str(key) + '-' + str(constants[key]) + '_'
         stringy = stringy[:-1]
@@ -187,23 +184,25 @@ def main(constants):
         # Show Plot after Loop is finished
         save_plots = 'yes'
         if save_plots == 'yes':
+            
             # Create a directory for which Variable is being iterated through
-            path_to_folder = r'C:\Users\isaia\OneDrive - purdue.edu\Spinning Dumbbell Analysis' + '\\' + constants['Change Var']
+            path_to_folder = r'C:\Users\isaia\OneDrive - purdue.edu\Spinning Dumbbell Analysis' + '\\' + constants['Main Folder Name']
+            IterationNumber = constants[constants['DataName']]
             if not os.path.exists(path_to_folder):
                 os.makedirs(path_to_folder)
 
             # Create a directory to hold each set of plots
-            path = path_to_folder + '\\' + str(stringy)
-            if not os.path.exists(path):
-                os.makedirs(path)
-
-            # Path for plot placing
-            fig_path = path
+            path_to_plots_folder = path_to_folder + '\\' + 'plots'
+            if not os.path.exists(path_to_plots_folder):
+                os.makedirs(path_to_plots_folder)
+            fig_path = path_to_plots_folder + '\\' + str(IterationNumber)
+            if not os.path.exists(fig_path):
+                os.makedirs(fig_path)
 
             # Save info for Animation
             temp_dic = {'r_s': r_s, 'theta_s': theta_s, 'phi_s': phi_s, 'velocity': v_s, 'omega_theta_s': omega_theta_s, 'omega_phi_s': omega_phi_s,'time': time}
             animation_data = pd.DataFrame(temp_dic)
-            animation_data.to_csv(path + '\\' + 'AnimationData.csv')
+            animation_data.to_csv(path_to_folder + '\\' + str(IterationNumber) + '.csv')
 
             # Permute through all possible Graphs (r, phi, theta, v, o_phi, o_theta)
             positions = [r_s, phi_s, theta_s]
@@ -212,51 +211,72 @@ def main(constants):
             velocities_names = [r'$v_r$', r'$\omega_\phi$', r'$\omega_\theta$']
 
             # Adjusting the font size of the plots
-            parameters = {'axes.labelsize': 18, 'axes.titlesize': 25}
-            plt.rcParams.update(parameters)
-            plt.figure()
-            for index1 in [0, 1, 2]:
-                for index2 in [0, 1, 2]:
-                    if index1 < index2:
-                        # Position vs Position Plots
-                        plt.plot(positions[index1], positions[index2], 's', markersize=1)
-                        plt.title(positions_names[index1] + '  vs  ' + positions_names[index2])
-                        plt.xlabel(positions_names[index1])
-                        plt.ylabel(positions_names[index2])
-                        plt.savefig(fig_path + '\\positions' + str(index1) + str(index2) + '.png', dpi = 300)
-                        plt.clf()
+            if constants['Settings'][0]:
+                parameters = {'axes.labelsize': 18, 'axes.titlesize': 25}
+                plt.rcParams.update(parameters)
+                plt.figure()
+                for index1 in [0, 1, 2]:
+                    for index2 in [0, 1, 2]:
+                        if index1 < index2:
+                            # Position vs Position Plots
+                            plt.plot(positions[index1], positions[index2], 's', markersize=1)
+                            plt.title(positions_names[index1] + '  vs  ' + positions_names[index2])
+                            plt.xlabel(positions_names[index1])
+                            plt.ylabel(positions_names[index2])
+                            plt.savefig(fig_path + '\\positions' + str(index1) + str(index2) + '.png', dpi = 300)
+                            plt.clf()
 
-                        # Velocity vs Velocity Plots
-                        plt.plot(velocities[index1], velocities[index2], 's', markersize=1)
-                        plt.title(velocities_names[index1] + '  vs  ' + velocities_names[index2])
-                        plt.xlabel(velocities_names[index1])
-                        plt.ylabel(velocities_names[index2])
-                        plt.savefig(fig_path + '\\velocities' + str(index1) + str(index2) + '.png', dpi = 300)
-                        plt.clf()
+                            # Velocity vs Velocity Plots
+                            plt.plot(velocities[index1], velocities[index2], 's', markersize=1)
+                            plt.title(velocities_names[index1] + '  vs  ' + velocities_names[index2])
+                            plt.xlabel(velocities_names[index1])
+                            plt.ylabel(velocities_names[index2])
+                            plt.savefig(fig_path + '\\velocities' + str(index1) + str(index2) + '.png', dpi = 300)
+                            plt.clf()
 
-                    if index1 == index2:
-                        # Position vs Velocity Plots
-                        plt.plot(positions[index1], velocities[index2], 's', markersize=1)
-                        plt.title(positions_names[index1] + '  vs  ' + velocities_names[index2])
-                        plt.xlabel(positions_names[index1])
-                        plt.ylabel(velocities_names[index2])
-                        plt.savefig(fig_path + '\\statespaces' + str(index1) + str(index2) + '.png', dpi = 300)
-                        plt.clf()
+                        if index1 == index2:
+                            # Position vs Velocity Plots
+                            plt.plot(positions[index1], velocities[index2], 's', markersize=1)
+                            plt.title(positions_names[index1] + '  vs  ' + velocities_names[index2])
+                            plt.xlabel(positions_names[index1])
+                            plt.ylabel(velocities_names[index2])
+                            plt.savefig(fig_path + '\\statespaces' + str(index1) + str(index2) + '.png', dpi = 300)
+                            plt.clf()
+            
+            if constants['Settings'][1]:
+                parameters = {'axes.labelsize': 18, 'axes.titlesize': 25}
+                plt.rcParams.update(parameters)
+                plt.figure()
 
+                plt.plot(time, r_s, 's', markersize=1)
+                plt.plot(time, phi_s, 's', markersize=1)
+                plt.title('Radius and Phi vs Time')
+                plt.xlabel('Time')
+                plt.ylabel('Value')
+                plt.savefig(fig_path + '\\TimePlotsRadPhi' + '.png', dpi = 300)
+                plt.clf()
+
+                plt.plot(phi_s, r_s, 's', markersize=1)
+                plt.title('Radius vs Phi')
+                plt.xlabel('Phi')
+                plt.ylabel('Radius')
+                plt.savefig(fig_path + '\\RadvsPhi' + '.png', dpi = 300)
+                plt.clf()
 
 if __name__ == '__main__':
-    constants = {'Change Var': 'ER_1-10', 
+    constants = {'Main Folder Name': 'Varying_Initial_Theta', 'DataName': 'IT',
                 'IR': 2, 'IT': 1.5, 'IP': 0, 
-                'IV': 0, 'IOT': 0, 'IOP': 20, 
-                'D': 10, 'K': 2, 'ER': 10, 'FR': .01, 'M1': 2, 'M2': 2}
-
+                'IV': 0, 'IOT': 0, 'IOP': 1, 
+                'D': 1, 'K': 2, 'ER': 1, 'FR': .01, 'TZ': 1,
+                'M1': 2, 'M2': 2,
+                'Settings': [False,          False]}
+                          # [Plot Lissajous, Plot Radius and Phi]
 
     var_name_list = ['IT']
     for var_name in var_name_list:
         start = 0
         stop = 100
-        constants['Change Var'] = var_name + '_' + str(start) + '-' + 'pi'
         for i in range(start, stop + 1):
-            constants[str(var_name)] = np.pi * i/100
+            constants[str(var_name)] = np.pi * i/200
             main(constants)
         constants[var_name] = start

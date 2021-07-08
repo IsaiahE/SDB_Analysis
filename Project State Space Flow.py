@@ -170,7 +170,6 @@ def main(constants):
         axs[3, 2].plot(phi_s, theta_s, 's', markersize=1)
         axs[3, 2].set_title('Phi vs Theta')
 
-        print(constants)
         stringy = ''
         for key in constants.keys():
             if key == 'Change Var':
@@ -180,7 +179,7 @@ def main(constants):
             else:
                 stringy += str(key) + '-' + str(constants[key]) + '_'
         stringy = stringy[:-1]
-        print(stringy)
+
         # Show Plot after Loop is finished
         save_plots = 'yes'
         if save_plots == 'yes':
@@ -188,6 +187,7 @@ def main(constants):
             # Create a directory for which Variable is being iterated through
             path_to_folder = r'C:\Users\isaia\OneDrive - purdue.edu\Spinning Dumbbell Analysis' + '\\' + constants['Main Folder Name']
             IterationNumber = constants[constants['DataName']]
+            print(constants['DataName'] + ': ' + str(IterationNumber))
             if not os.path.exists(path_to_folder):
                 os.makedirs(path_to_folder)
 

@@ -39,7 +39,7 @@ def main(constants):
     alpha = fric
     beta = fric
     gamma = fric
-    torque_z = 1
+    torque_z = constants['TZ']
 
     def velocity_friction1(friction_const, v):
         return friction_const * v ** 2
@@ -65,7 +65,7 @@ def main(constants):
 
     # Solve ODE
     s_0 = [r_0, theta_0, phi_0, v_0, omega_theta_0, omega_phi_0]
-    time = np.linspace(0, 1000, 100000)
+    time = np.linspace(0, 10000, 1000000)
     solution = integrate.odeint(model, s_0, time)
 
     # Form Solutions
@@ -75,7 +75,6 @@ def main(constants):
     v_s = solution[:, 3]
     omega_theta_s = solution[:, 4]
     omega_phi_s = solution[:, 5]
-
 
     # Analysis
     # Check Energy during the orbit
@@ -264,19 +263,19 @@ def main(constants):
                 plt.clf()
 
 if __name__ == '__main__':
-    constants = {'Main Folder Name': 'Varying_Initial_Theta', 'DataName': 'IT',
-                'IR': 2, 'IT': 1.5, 'IP': 0, 
+    constants = {'Main Folder Name': 'Varying_Friction', 'DataName': 'FR',
+                'IR': 5, 'IT': np.pi / 4, 'IP': 0, 
                 'IV': 0, 'IOT': 0, 'IOP': 1, 
-                'D': 1, 'K': 2, 'ER': 1, 'FR': .01, 'TZ': 1,
+                'D': 1, 'K': 2, 'ER': 1, 'FR': .01, 'TZ': .1,
                 'M1': 2, 'M2': 2,
                 'Settings': [False,          False]}
                           # [Plot Lissajous, Plot Radius and Phi]
 
-    var_name_list = ['IT']
+    var_name_list = ['FR']
     for var_name in var_name_list:
         start = 0
         stop = 100
         for i in range(start, stop + 1):
-            constants[str(var_name)] = np.pi * i/200
+            constants[str(var_name)] = i / 100
             main(constants)
         constants[var_name] = start

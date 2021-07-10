@@ -186,7 +186,6 @@ def main(constants):
             # Create a directory for which Variable is being iterated through
             path_to_folder = r'C:\Users\isaia\OneDrive - purdue.edu\Spinning Dumbbell Analysis' + '\\' + constants['Main Folder Name']
             IterationNumber = constants[constants['DataName']]
-            print(constants['DataName'] + ': ' + str(IterationNumber))
             if not os.path.exists(path_to_folder):
                 os.makedirs(path_to_folder)
 
@@ -203,8 +202,16 @@ def main(constants):
                         'velocity': v_s[900000:], 'omega_theta_s': omega_theta_s[900000:], 'omega_phi_s': omega_phi_s[900000:],
                         'time': time[900000:]}
             animation_data = pd.DataFrame(temp_dic)
-            animation_data.to_csv(path_to_folder + '\\' + str(IterationNumber) + '.csv')
 
+            # Save Data to file for varying two variables
+            if constants['Settings'][2]:
+                animation_name = constants['DataName'] + '-' +  str(constants[constants['DataName']]) + '-' + str(constants[constants['DataName2']])
+                print(animation_name)
+                animation_data.to_csv(path_to_folder + '\\' + str(animation_name) + '.csv')
+            # Save Data to file for varying one variable
+            if not constants['Settings'][2]:
+                print(constants['DataName'] + ': ' + str(IterationNumber))
+                animation_data.to_csv(path_to_folder + '\\' + str(IterationNumber) + '.csv')
             # Permute through all possible Graphs (r, phi, theta, v, o_phi, o_theta)
             positions = [r_s, phi_s, theta_s]
             velocities = [v_s, omega_phi_s, omega_theta_s]
@@ -268,21 +275,36 @@ def main(constants):
                 plt.close()
 
 if __name__ == '__main__':
-    constants = {'Main Folder Name': '', 'DataName': 'FR',
+    constants = {'Main Folder Name': '', 'DataName': 'FR', 'DataName2': 'IOP',
                 'IR': 10, 'IT': np.pi / 4, 'IP': 0, 
                 'IV': 0, 'IOT': 0, 'IOP': 1, 
-                'D': 0.7, 'K': 2, 'ER': 0.5, 'FR': .1, 'TZ': .7,
+                'D': 0.7, 'K': 2, 'ER': 0.5, 'FR': .3, 'TZ': .7,
                 'M1': 2, 'M2': 2,
-                'Settings': [False,          False]}
-                          # [Plot Lissajous, Plot Radius and Phi]
+                'Settings': [False,          False,               True]}
+                          # [Plot Lissajous, Plot Radius and Phi, Saves Multiple Variables]
 
-    constants['Main Folder Name'] = 'Varying_Friction3'
-    var_name_list = ['FR']
-    for var_name in var_name_list:
-        constants['DataName'] = var_name
-        start = 0
+    # Creates list of data with two variables varried
+    constants['Main Folder Name'] = 'Varying_IOP_FR'
+    if constants['Settings'][2]:
+        constants['DataName'] = 'IOP'
+        constants['DataName2'] = 'FR'
+        var_name = 'IOP'
+        var_name2 = 'FR'
+        start = 1
         stop = 100
+        for j in range(start, stop + 1):
+            constants[str(var_name2)] = j / 10
+            for i in range(start, stop + 1):
+                constants[str(var_name)] = i / 10
+                main(constants)
+
+    # Creates list of data with only one variable varried
+    if not constants['Settings'][2]:
+        var_name = 'IR'
+        constants['DataName'] = 'IR'
+        start = 1
+        stop = 100
+        constants[str(var_name)] = j / 10
         for i in range(start, stop + 1):
-            constants[str(var_name)] = i / 250
+            constants[str(var_name)] = i / 10
             main(constants)
-        constants[var_name] = start

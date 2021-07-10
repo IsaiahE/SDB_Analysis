@@ -199,7 +199,9 @@ def main(constants):
                 os.makedirs(fig_path)
 
             # Save info for Animation
-            temp_dic = {'r_s': r_s, 'theta_s': theta_s, 'phi_s': phi_s, 'velocity': v_s, 'omega_theta_s': omega_theta_s, 'omega_phi_s': omega_phi_s,'time': time}
+            temp_dic = {'r_s': r_s[900000:], 'theta_s': theta_s[900000:], 'phi_s': phi_s[900000:], 
+                        'velocity': v_s[900000:], 'omega_theta_s': omega_theta_s[900000:], 'omega_phi_s': omega_phi_s[900000:],
+                        'time': time[900000:]}
             animation_data = pd.DataFrame(temp_dic)
             animation_data.to_csv(path_to_folder + '\\' + str(IterationNumber) + '.csv')
 
@@ -241,6 +243,7 @@ def main(constants):
                             plt.ylabel(velocities_names[index2])
                             plt.savefig(fig_path + '\\statespaces' + str(index1) + str(index2) + '.png', dpi = 300)
                             plt.clf()
+                plt.close()
             
             if constants['Settings'][1]:
                 parameters = {'axes.labelsize': 18, 'axes.titlesize': 25}
@@ -262,21 +265,24 @@ def main(constants):
                 plt.savefig(fig_path + '\\RadvsPhi' + '.png', dpi = 300)
                 plt.clf()
 
+                plt.close()
+
 if __name__ == '__main__':
-    constants = {'Main Folder Name': 'Varying_Theta2', 'DataName': 'IT',
-                'IR': 5, 'IT': np.pi / 4, 'IP': 0, 
+    constants = {'Main Folder Name': '', 'DataName': 'FR',
+                'IR': 10, 'IT': np.pi / 4, 'IP': 0, 
                 'IV': 0, 'IOT': 0, 'IOP': 1, 
-                'D': 1, 'K': 2, 'ER': 1, 'FR': .1, 'TZ': .1,
+                'D': 0.7, 'K': 2, 'ER': 0.5, 'FR': .1, 'TZ': .7,
                 'M1': 2, 'M2': 2,
                 'Settings': [False,          False]}
                           # [Plot Lissajous, Plot Radius and Phi]
 
-    var_name_list = ['IT']
+    constants['Main Folder Name'] = 'Varying_Friction3'
+    var_name_list = ['FR']
     for var_name in var_name_list:
-        constants['DataName'] == var_name
+        constants['DataName'] = var_name
         start = 0
         stop = 100
         for i in range(start, stop + 1):
-            constants[str(var_name)] = np.pi * i / 200
+            constants[str(var_name)] = i / 250
             main(constants)
         constants[var_name] = start

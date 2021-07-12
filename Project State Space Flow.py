@@ -196,9 +196,6 @@ def main(constants):
             path_to_plots_folder = path_to_folder + '\\' + 'plots'
             if not os.path.exists(path_to_plots_folder):
                 os.makedirs(path_to_plots_folder)
-            fig_path = path_to_plots_folder + '\\' + str(IterationNumber)
-            if not os.path.exists(fig_path):
-                os.makedirs(fig_path)
 
             # Save info for Animation
             temp_dic = {'r_s': r_s[949000:], 'theta_s': theta_s[949000:], 'phi_s': phi_s[949000:], 
@@ -230,6 +227,10 @@ def main(constants):
 
             # Adjusting the font size of the plots
             if constants['Settings'][0]:
+
+                fig_path = path_to_plots_folder + '\\' + str(IterationNumber)
+                if not os.path.exists(fig_path):
+                    os.makedirs(fig_path)
 
                 parameters = {'axes.labelsize': 18, 'axes.titlesize': 25}
                 plt.rcParams.update(parameters)
@@ -264,6 +265,10 @@ def main(constants):
                 plt.close()
             
             if constants['Settings'][1]:
+
+                fig_path = path_to_plots_folder + '\\' + str(IterationNumber)
+                if not os.path.exists(fig_path):
+                    os.makedirs(fig_path)
 
                 parameters = {'axes.labelsize': 18, 'axes.titlesize': 25}
                 plt.rcParams.update(parameters)

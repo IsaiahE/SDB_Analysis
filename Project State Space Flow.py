@@ -8,7 +8,7 @@ import time
 import os
 
 # Isaiah Ertel Andre Suzanne
-# Updated 3:00 p.m. 7/1/2021
+# Updated 9:00 p.m. 7/10/2021
 # State Space for the Spinning dumbbell with spring connection
 
 start = time.time()
@@ -142,32 +142,35 @@ def main(constants):
         plot_solutions = True
 
     if plot_solutions:
-        # Graph Projections of all Trajectories (ax1, ax2, ax3, ax4, ax5, ax6)
-        f, axs = plt.subplots(4, 3)
-        axs[0, 0].plot(time, r_s, 's', markersize=1)
-        axs[0, 0].set_title('Radius')
-        axs[0, 1].plot(time, theta_s, 's', markersize=1)
-        axs[0, 1].set_title('Theta')
-        axs[0, 2].plot(time, phi_s, 's', markersize=1)
-        axs[0, 2].set_title('Phi')
-        axs[1, 0].plot(time, v_s, 's', markersize=1)
-        axs[1, 0].set_title('Radial Velocity')
-        axs[1, 1].plot(time, omega_theta_s, 's', markersize=1)
-        axs[1, 1].set_title('Omega Theta')
-        axs[1, 2].plot(time, omega_phi_s, 's', markersize=1)
-        axs[1, 2].set_title('Omega Phi')
-        axs[2, 0].plot(v_s, omega_theta_s, 's', markersize=1)
-        axs[2, 0].set_title('Velocity vs Omega_Theta')
-        axs[2, 1].plot(v_s, omega_phi_s, 's', markersize=1)
-        axs[2, 1].set_title('Velocity vs Omega_Phi')
-        axs[2, 2].plot(omega_phi_s, omega_theta_s, 's', markersize=1)
-        axs[2, 2].set_title('Omega_Phi vs Omega_Theta')
-        axs[3, 0].plot(r_s, theta_s, 's', markersize=1)
-        axs[3, 0].set_title('Radius vs Theta')
-        axs[3, 1].plot(r_s, phi_s, 's', markersize=1)
-        axs[3, 1].set_title('Radius vs Phi')
-        axs[3, 2].plot(phi_s, theta_s, 's', markersize=1)
-        axs[3, 2].set_title('Phi vs Theta')
+
+        if constants['Settings'][0]:
+
+            # Graph Projections of all Trajectories (ax1, ax2, ax3, ax4, ax5, ax6)
+            f, axs = plt.subplots(4, 3)
+            axs[0, 0].plot(time, r_s, 's', markersize=1)
+            axs[0, 0].set_title('Radius')
+            axs[0, 1].plot(time, theta_s, 's', markersize=1)
+            axs[0, 1].set_title('Theta')
+            axs[0, 2].plot(time, phi_s, 's', markersize=1)
+            axs[0, 2].set_title('Phi')
+            axs[1, 0].plot(time, v_s, 's', markersize=1)
+            axs[1, 0].set_title('Radial Velocity')
+            axs[1, 1].plot(time, omega_theta_s, 's', markersize=1)
+            axs[1, 1].set_title('Omega Theta')
+            axs[1, 2].plot(time, omega_phi_s, 's', markersize=1)
+            axs[1, 2].set_title('Omega Phi')
+            axs[2, 0].plot(v_s, omega_theta_s, 's', markersize=1)
+            axs[2, 0].set_title('Velocity vs Omega_Theta')
+            axs[2, 1].plot(v_s, omega_phi_s, 's', markersize=1)
+            axs[2, 1].set_title('Velocity vs Omega_Phi')
+            axs[2, 2].plot(omega_phi_s, omega_theta_s, 's', markersize=1)
+            axs[2, 2].set_title('Omega_Phi vs Omega_Theta')
+            axs[3, 0].plot(r_s, theta_s, 's', markersize=1)
+            axs[3, 0].set_title('Radius vs Theta')
+            axs[3, 1].plot(r_s, phi_s, 's', markersize=1)
+            axs[3, 1].set_title('Radius vs Phi')
+            axs[3, 2].plot(phi_s, theta_s, 's', markersize=1)
+            axs[3, 2].set_title('Phi vs Theta')
 
         stringy = ''
         for key in constants.keys():
@@ -198,20 +201,27 @@ def main(constants):
                 os.makedirs(fig_path)
 
             # Save info for Animation
-            temp_dic = {'r_s': r_s[900000:], 'theta_s': theta_s[900000:], 'phi_s': phi_s[900000:], 
-                        'velocity': v_s[900000:], 'omega_theta_s': omega_theta_s[900000:], 'omega_phi_s': omega_phi_s[900000:],
-                        'time': time[900000:]}
+            temp_dic = {'r_s': r_s[949000:], 'theta_s': theta_s[949000:], 'phi_s': phi_s[949000:], 
+                        'velocity': v_s[949000:], 'omega_theta_s': omega_theta_s[949000:], 'omega_phi_s': omega_phi_s[949000:],
+                        'time': time[949000:]}
             animation_data = pd.DataFrame(temp_dic)
 
             # Save Data to file for varying two variables
             if constants['Settings'][2]:
+
+                ###################################################
+                # Update Below Code : Needs both Names only has one
+                # animation_name = constants['DataName'] + '-' +  str(constants[constants['DataName']]) + '-' + str(constants['DataName2]) + str(constants[constants['DataName2']])
                 animation_name = constants['DataName'] + '-' +  str(constants[constants['DataName']]) + '-' + str(constants[constants['DataName2']])
                 print(animation_name)
                 animation_data.to_csv(path_to_folder + '\\' + str(animation_name) + '.csv')
+            
             # Save Data to file for varying one variable
             if not constants['Settings'][2]:
+
                 print(constants['DataName'] + ': ' + str(IterationNumber))
                 animation_data.to_csv(path_to_folder + '\\' + str(IterationNumber) + '.csv')
+            
             # Permute through all possible Graphs (r, phi, theta, v, o_phi, o_theta)
             positions = [r_s, phi_s, theta_s]
             velocities = [v_s, omega_phi_s, omega_theta_s]
@@ -220,6 +230,7 @@ def main(constants):
 
             # Adjusting the font size of the plots
             if constants['Settings'][0]:
+
                 parameters = {'axes.labelsize': 18, 'axes.titlesize': 25}
                 plt.rcParams.update(parameters)
                 plt.figure()
@@ -253,6 +264,7 @@ def main(constants):
                 plt.close()
             
             if constants['Settings'][1]:
+
                 parameters = {'axes.labelsize': 18, 'axes.titlesize': 25}
                 plt.rcParams.update(parameters)
                 plt.figure()
@@ -280,11 +292,11 @@ if __name__ == '__main__':
                 'IV': 0, 'IOT': 0, 'IOP': 1, 
                 'D': 0.7, 'K': 2, 'ER': 0.5, 'FR': .3, 'TZ': .7,
                 'M1': 2, 'M2': 2,
-                'Settings': [False,          False,               True]}
+                'Settings': [False,          False,               False]}
                           # [Plot Lissajous, Plot Radius and Phi, Saves Multiple Variables]
 
     # Creates list of data with two variables varried
-    constants['Main Folder Name'] = 'Varying_IOP_FR'
+    constants['Main Folder Name'] = 'Varying_Friction4'
     if constants['Settings'][2]:
         constants['DataName'] = 'IOP'
         constants['DataName2'] = 'FR'
@@ -292,7 +304,7 @@ if __name__ == '__main__':
         var_name2 = 'FR'
         start = 1
         stop = 100
-        for j in range(start, stop + 1):
+        for j in range(start + 3, stop + 1):
             constants[str(var_name2)] = j / 10
             for i in range(start, stop + 1):
                 constants[str(var_name)] = i / 10
@@ -300,11 +312,10 @@ if __name__ == '__main__':
 
     # Creates list of data with only one variable varried
     if not constants['Settings'][2]:
-        var_name = 'IR'
-        constants['DataName'] = 'IR'
-        start = 1
-        stop = 100
-        constants[str(var_name)] = j / 10
+        var_name = 'FR'
+        constants['DataName'] = 'FR'
+        start = 75
+        stop = 200
         for i in range(start, stop + 1):
-            constants[str(var_name)] = i / 10
+            constants[str(var_name)] = i * 2 / 1000
             main(constants)

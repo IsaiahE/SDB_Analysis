@@ -293,15 +293,17 @@ def main(constants):
 
 if __name__ == '__main__':
     constants = {'Main Folder Name': '', 'DataName': 'FR', 'DataName2': 'IOP',
-                'IR': 10, 'IT': np.pi / 4, 'IP': 0, 
+                'IR': 15, 'IT': np.pi / 4, 'IP': 0, 
                 'IV': 0, 'IOT': 0, 'IOP': 1, 
                 'D': 0.7, 'K': 2, 'ER': 0.5, 'FR': .3, 'TZ': .7,
                 'M1': 2, 'M2': 2,
                 'Settings': [False,          False,               False]}
                           # [Plot Lissajous, Plot Radius and Phi, Saves Multiple Variables]
 
+    # Name for the Data Directory 
+    constants['Main Folder Name'] = 'Varying_Theta3'
+    
     # Creates list of data with two variables varried
-    constants['Main Folder Name'] = 'Varying_Friction4'
     if constants['Settings'][2]:
         constants['DataName'] = 'IOP'
         constants['DataName2'] = 'FR'
@@ -317,10 +319,10 @@ if __name__ == '__main__':
 
     # Creates list of data with only one variable varried
     if not constants['Settings'][2]:
-        var_name = 'FR'
-        constants['DataName'] = 'FR'
-        start = 75
-        stop = 200
+        var_name = 'IT'
+        constants['DataName'] = var_name
+        start = 1
+        stop = 50
         for i in range(start, stop + 1):
-            constants[str(var_name)] = i * 2 / 1000
+            constants[str(var_name)] = i * np.pi / 100
             main(constants)

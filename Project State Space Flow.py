@@ -200,7 +200,7 @@ def main(constants):
             if not os.path.isfile(path_to_folder + '//' + 'info.txt'):
                 f = open(path_to_folder + '//' + 'info.txt', 'w')
                 for key in constants.keys():
-                    f.write(str(key) + ':' + str(constants(key)) + '\n')
+                    f.write(str(key) + ':' + str(constants[key]) + '\n')
                 f.close()
 
             # Create a directory to hold each set of plots

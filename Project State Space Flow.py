@@ -6,7 +6,6 @@ import random as random
 import pandas as pd
 import time
 import os
-import json
 
 # Isaiah Ertel Andre Suzanne
 # Updated 9:00 p.m. 7/10/2021

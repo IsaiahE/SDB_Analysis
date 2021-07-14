@@ -6,6 +6,7 @@ import random as random
 import pandas as pd
 import time
 import os
+import json
 
 # Isaiah Ertel Andre Suzanne
 # Updated 9:00 p.m. 7/10/2021
@@ -182,6 +183,10 @@ def main(constants):
                 stringy += str(key) + '-' + str(constants[key]) + '_'
         stringy = stringy[:-1]
 
+        # Create a file for saving MatLab Plots
+        if not os.path.exists(r'C:\Users\isaia\OneDrive - purdue.edu\Spinning Dumbbell Analysis' + '\\' + constants['Main Folder Name'] + '\\plots\\matlabplots'):
+            os.makedirs(r'C:\Users\isaia\OneDrive - purdue.edu\Spinning Dumbbell Analysis' + '\\' + constants['Main Folder Name'] + '\\plots\\matlabplots')
+
         # Show Plot after Loop is finished
         save_plots = 'yes'
         if save_plots == 'yes':
@@ -191,6 +196,13 @@ def main(constants):
             IterationNumber = constants[constants['DataName']]
             if not os.path.exists(path_to_folder):
                 os.makedirs(path_to_folder)
+
+            # Create Info text document to store the dictionary
+            if not os.path.isfile(path_to_folder + '//' + 'info.txt'):
+                f = open(path_to_folder + '//' + 'info.txt', 'w')
+                for key in constants.keys():
+                    f.write(str(key) + ':' + str(constants(key)) + '\n')
+                f.close()
 
             # Create a directory to hold each set of plots
             path_to_plots_folder = path_to_folder + '\\' + 'plots'
@@ -206,10 +218,7 @@ def main(constants):
             # Save Data to file for varying two variables
             if constants['Settings'][2]:
 
-                ###################################################
-                # Update Below Code : Needs both Names only has one
-                # animation_name = constants['DataName'] + '-' +  str(constants[constants['DataName']]) + '-' + str(constants['DataName2]) + str(constants[constants['DataName2']])
-                animation_name = constants['DataName'] + '-' +  str(constants[constants['DataName']]) + '-' + str(constants[constants['DataName2']])
+                animation_name = constants['DataName'] + '-' +  str(constants[constants['DataName']]) + '-' + str(constants['DataName2']) + str(constants[constants['DataName2']])
                 print(animation_name)
                 animation_data.to_csv(path_to_folder + '\\' + str(animation_name) + '.csv')
             
@@ -293,15 +302,15 @@ def main(constants):
 
 if __name__ == '__main__':
     constants = {'Main Folder Name': '', 'DataName': 'FR', 'DataName2': 'IOP',
-                'IR': 15, 'IT': np.pi / 4, 'IP': 0, 
+                'IR': 10, 'IT': np.pi / 4, 'IP': 0, 
                 'IV': 0, 'IOT': 0, 'IOP': 1, 
-                'D': 0.7, 'K': 2, 'ER': 0.5, 'FR': .3, 'TZ': .7,
+                'D': 1, 'K': 2, 'ER': 1, 'FR': .5, 'TZ': .7,
                 'M1': 2, 'M2': 2,
                 'Settings': [False,          False,               False]}
                           # [Plot Lissajous, Plot Radius and Phi, Saves Multiple Variables]
 
     # Name for the Data Directory 
-    constants['Main Folder Name'] = 'Varying_Theta3'
+    constants['Main Folder Name'] = 'Varying_Theta2'
     
     # Creates list of data with two variables varried
     if constants['Settings'][2]:
@@ -319,9 +328,9 @@ if __name__ == '__main__':
 
     # Creates list of data with only one variable varried
     if not constants['Settings'][2]:
-        var_name = 'IT'
+        var_name = 'IOT'
         constants['DataName'] = var_name
-        start = 1
+        start = 0
         stop = 50
         for i in range(start, stop + 1):
             constants[str(var_name)] = i * np.pi / 100

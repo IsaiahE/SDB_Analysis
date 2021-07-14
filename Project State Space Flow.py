@@ -14,11 +14,17 @@ import os
 start = time.time()
 
 def main(constants):
-    # Loop to populate data file with multiple iterations of randomly choosen velocities at fixed energies
+
+    # Create Info text document to store the dictionary
+    path_to_folder = r'C:\Users\isaia\OneDrive - purdue.edu\Spinning Dumbbell Analysis' + '\\' + constants['Main Folder Name']
+    if not os.path.isfile(path_to_folder + '//' + 'info.txt'):
+        f = open(path_to_folder + '//' + 'info.txt', 'w')
+        for key in list(constants.keys()):
+            f.write(str(key) + ':  ' + str(constants[key]) + '\n')
+            'Writing to Info.txt'
+        f.close()
 
     # Define our constants and starting values
-    # Energy
-    # E = constants['Energy'] # Initial Energy (Not currently used)
     # Positions
     r_0 = constants['IR'] # Initial Radius
     theta_0 = constants['IT'] # Initial Theta
@@ -195,13 +201,6 @@ def main(constants):
             IterationNumber = constants[constants['DataName']]
             if not os.path.exists(path_to_folder):
                 os.makedirs(path_to_folder)
-
-            # Create Info text document to store the dictionary
-            if not os.path.isfile(path_to_folder + '//' + 'info.txt'):
-                f = open(path_to_folder + '//' + 'info.txt', 'w')
-                for key in constants.keys():
-                    f.write(str(key) + ':' + str(constants[key]) + '\n')
-                f.close()
 
             # Create a directory to hold each set of plots
             path_to_plots_folder = path_to_folder + '\\' + 'plots'

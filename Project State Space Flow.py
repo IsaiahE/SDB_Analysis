@@ -8,7 +8,7 @@ import time
 import os
 
 # Isaiah Ertel Andre Suzanne
-# Updated 9:00 p.m. 7/10/2021
+# Updated 7/15/2021
 # State Space for the Spinning dumbbell with spring connection
 
 start = time.time()
@@ -40,13 +40,14 @@ def main(constants):
     r_e = constants['ER']  # Equalibrium Point
     fric = constants['FR'] # Friction Constant
     mu = m1*m2 / (m1 + m2) # Reduced Mass
+    delta = constants['Delta'] # Stiffining of the Spring
     # Forces
     D_theta = constants['D'] # Torque producing force
     alpha = fric
     beta = fric
     gamma = fric
     torque_z = constants['TZ']
-
+    
     def velocity_friction1(friction_const, v):
         return friction_const * v ** 2
 
@@ -64,14 +65,14 @@ def main(constants):
         dr = v
         dtheta = omega_theta
         dphi = omega_phi
-        dv = r * omega_theta ** 2 + r * np.sin(theta) ** 2 * omega_phi ** 2 - 2 * k * (r - r_e) / mu - alpha * abs(v) / mu
+        dv = r * omega_theta ** 2 + r * np.sin(theta) ** 2 * omega_phi ** 2 - 2 * k * (r - r_e) / mu - 2 * delta * (r - r_e)*2 - alpha * abs(v) / mu
         domega_theta = np.sin(theta) * np.cos(theta) * omega_phi ** 2 - 2 * v * omega_theta / r + D_theta / (r ** 2 * mu) - beta * abs(omega_theta) / (r ** 2 * mu)
         domega_phi = -2 * omega_theta * omega_phi * np.cos(theta) / np.sin(theta) - 2 * v * omega_phi / r - gamma * abs(omega_phi) / (r ** 2 * mu) + torque_z / (mu * r ** 2 * np.sin(theta) ** 2)
         return [dr, dtheta, dphi, dv, domega_theta, domega_phi]
 
     # Solve ODE
     s_0 = [r_0, theta_0, phi_0, v_0, omega_theta_0, omega_phi_0]
-    time = np.linspace(0, 10000, 1000000)
+    time = np.linspace(0, 5000, 100000)
     solution = integrate.odeint(model, s_0, time)
 
     # Form Solutions
@@ -300,15 +301,15 @@ def main(constants):
 
 if __name__ == '__main__':
     constants = {'Main Folder Name': '', 'DataName': 'FR', 'DataName2': 'IOP',
-                'IR': 10, 'IT': np.pi / 4, 'IP': 0, 
-                'IV': 0, 'IOT': 0, 'IOP': 1, 
-                'D': 1, 'K': 2, 'ER': 1, 'FR': .5, 'TZ': .7,
+                'IR': 10, 'IT': np.pi / 8, 'IP': 0, 
+                'IV': 0, 'IOT': 1, 'IOP': 1, 
+                'D': 1, 'K': 2, 'ER': 1, 'FR': .5, 'TZ': .7, 'Delta': .1,
                 'M1': 2, 'M2': 2,
                 'Settings': [False,          False,               False]}
                           # [Plot Lissajous, Plot Radius and Phi, Saves Multiple Variables]
 
     # Name for the Data Directory 
-    constants['Main Folder Name'] = 'Varying_Theta2'
+    constants['Main Folder Name'] = 'Varying_D2'
     
     # Creates list of data with two variables varried
     if constants['Settings'][2]:
@@ -326,10 +327,10 @@ if __name__ == '__main__':
 
     # Creates list of data with only one variable varried
     if not constants['Settings'][2]:
-        var_name = 'IOT'
+        var_name = 'D'
         constants['DataName'] = var_name
-        start = 0
-        stop = 50
+        start = 100
+        stop = 150
         for i in range(start, stop + 1):
-            constants[str(var_name)] = i * np.pi / 100
+            constants[str(var_name)] = i / 100
             main(constants)

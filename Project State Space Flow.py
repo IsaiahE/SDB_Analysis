@@ -15,8 +15,12 @@ start = time.time()
 
 def main(constants):
 
-    # Create Info text document to store the dictionary
+    # Create Main Folder File
     path_to_folder = r'C:\Users\isaia\OneDrive - purdue.edu\Spinning Dumbbell Analysis' + '\\' + constants['Main Folder Name']
+    if not os.path.exists(path_to_folder):
+        os.makedirs(path_to_folder)
+
+    # Create Info text document to store the dictionary
     if not os.path.isfile(path_to_folder + '//' + 'info.txt'):
         f = open(path_to_folder + '//' + 'info.txt', 'w')
         for key in list(constants.keys()):
@@ -48,15 +52,6 @@ def main(constants):
     gamma = fric
     torque_z = constants['TZ']
     
-    def velocity_friction1(friction_const, v):
-        return friction_const * v ** 2
-
-    def velocity_friction2(friction_const, o_t, r):
-        return friction_const * o_t ** 2 * r ** 3
-
-    def velocity_friction3(friction_const, o_p, r):
-        return friction_const * o_p ** 2 * r ** 3
-
     # D_theta function of theta probably
     
     # Defines our model using the State Space Flow Equations
@@ -299,22 +294,19 @@ def main(constants):
 
                 plt.close()
 
-if __name__ == '__main__':
-    constants = {'Main Folder Name': '', 'DataName': 'FR', 'DataName2': 'IOP',
-                'IR': 10, 'IT': np.pi / 8, 'IP': 0, 
-                'IV': 0, 'IOT': 1, 'IOP': 1, 
-                'D': 1, 'K': 2, 'ER': 1, 'FR': .5, 'TZ': .7, 'Delta': .1,
-                'M1': 2, 'M2': 2,
-                'Settings': [False,          False,               False]}
-                          # [Plot Lissajous, Plot Radius and Phi, Saves Multiple Variables]
+def run_parameter1D(Var_Name_Input, start, stop, steps=50):
+    # Creates list of data with only one variable varried
+    if not constants['Settings'][2]:
+        constants['DataName'] = Var_Name_Input
+        for i in range(0, steps + 1):
+            constants[str(constants['DataName'])] = (i / steps) * stop + start * (steps - i) / steps
+            main(constants)
 
-    # Name for the Data Directory 
-    constants['Main Folder Name'] = 'Varying_D2'
-    
+def run_parameter2D():
     # Creates list of data with two variables varried
     if constants['Settings'][2]:
-        constants['DataName'] = 'IOP'
-        constants['DataName2'] = 'FR'
+        constants['DataName'] = None
+        constants['DataName2'] = None
         var_name = 'IOP'
         var_name2 = 'FR'
         start = 1
@@ -325,12 +317,31 @@ if __name__ == '__main__':
                 constants[str(var_name)] = i / 10
                 main(constants)
 
-    # Creates list of data with only one variable varried
-    if not constants['Settings'][2]:
-        var_name = 'D'
-        constants['DataName'] = var_name
-        start = 100
-        stop = 150
-        for i in range(start, stop + 1):
-            constants[str(var_name)] = i / 100
-            main(constants)
+
+if __name__ == '__main__':
+    constants = {'Main Folder Name': '', 'DataName': 'FR', 'DataName2': 'IOP',
+                'IR': 10, 'IT': np.pi / 4, 'IP': 0, 
+                'IV': 0, 'IOT': 1, 'IOP': 0, 
+                'D': 0, 'K': 1, 'ER': 1, 'FR': .1, 'TZ': .1, 'Delta': .1,
+                'M1': 2, 'M2': 2,
+                'Settings': [False,          False,               False]}
+                          # [Plot Lissajous, Plot Radius and Phi, Saves Multiple Variables]
+
+    # Name for the Data Directory 
+    constants['Main Folder Name'] = ''
+    
+    # Loop through multiple parameters
+    MainDirectory_List = ['Friction1', 'Torque1', 'K1']
+    DataName_List = ['FR', 'TZ', 'K']
+
+    constants['Main Folder Name'] = 'Friction1'
+    run_parameter1D('FR', 0, 1)
+    constants['FR'] = .1
+
+    constants['Main Folder Name'] = 'Torque1'
+    run_parameter1D('TZ', 0, 1)
+    constants['TZ'] = .1
+
+    constants['Main Folder Name'] = 'K1'
+    run_parameter1D('K', 0, 10)
+    constants['K'] = 1

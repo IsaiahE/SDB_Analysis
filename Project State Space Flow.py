@@ -50,7 +50,13 @@ def main(constants):
     alpha = fric
     beta = fric
     gamma = fric
-    torque_z = constants['TZ']
+    # Torque from Polarized Light    
+    g = 1 # Gravity constant
+    c = 1 # Speed of Light
+    P = (m1 + m2) * g * c # Power is fixed to balance Gravity (F = P/c = m * g)
+    f_light = constants['f']
+    torque_z = 2 * P / f_light
+
     
     # D_theta function of theta probably
     
@@ -204,9 +210,9 @@ def main(constants):
                 os.makedirs(path_to_plots_folder)
 
             # Save info for Animation
-            temp_dic = {'r_s': r_s[949000:], 'theta_s': theta_s[949000:], 'phi_s': phi_s[949000:], 
-                        'velocity': v_s[949000:], 'omega_theta_s': omega_theta_s[949000:], 'omega_phi_s': omega_phi_s[949000:],
-                        'time': time[949000:]}
+            temp_dic = {'r_s': r_s[80000:], 'theta_s': theta_s[80000:], 'phi_s': phi_s[80000:], 
+                        'velocity': v_s[80000:], 'omega_theta_s': omega_theta_s[80000:], 'omega_phi_s': omega_phi_s[80000:],
+                        'time': time[80000:]}
             animation_data = pd.DataFrame(temp_dic)
 
             # Save Data to file for varying two variables
@@ -320,9 +326,9 @@ def run_parameter2D():
 
 if __name__ == '__main__':
     constants = {'Main Folder Name': '', 'DataName': 'FR', 'DataName2': 'IOP',
-                'IR': 10, 'IT': np.pi / 4, 'IP': 0, 
-                'IV': 0, 'IOT': 1, 'IOP': 0, 
-                'D': 0, 'K': 1, 'ER': 1, 'FR': .1, 'TZ': .1, 'Delta': .1,
+                'IR': 6, 'IT': np.pi / 4, 'IP': 0, 
+                'IV': 0, 'IOT': 0, 'IOP': 1, 
+                'D': 0, 'K': 1, 'ER': 1, 'FR': .1, 'f': 10, 'Delta': .1,
                 'M1': 2, 'M2': 2,
                 'Settings': [False,          False,               False]}
                           # [Plot Lissajous, Plot Radius and Phi, Saves Multiple Variables]
@@ -330,18 +336,27 @@ if __name__ == '__main__':
     # Name for the Data Directory 
     constants['Main Folder Name'] = ''
     
+    # Note : May want to run with IOP != 0. MatLab simulation had errors for IOP = 0 from some kind of discontinuity
+
     # Loop through multiple parameters
-    MainDirectory_List = ['Friction1', 'Torque1', 'K1']
-    DataName_List = ['FR', 'TZ', 'K']
-
-    constants['Main Folder Name'] = 'Friction1'
-    run_parameter1D('FR', 0, 1)
-    constants['FR'] = .1
-
-    constants['Main Folder Name'] = 'Torque1'
-    run_parameter1D('TZ', 0, 1)
-    constants['TZ'] = .1
-
-    constants['Main Folder Name'] = 'K1'
-    run_parameter1D('K', 0, 10)
-    constants['K'] = 1
+    # 
+    # Generally the format is 
+    # Change name with constants['Main Folder Name]
+    # Change any parameters that you want different from above
+    # run_parameter1D
+    # 
+    constants['Main Folder Name'] = 'f2'
+    run_parameter1D('f', 100000000, 100000000000, steps=100)
+    #constants['Main Folder Name'] = 'Delta2'
+    #constants['K'] = 2
+    #run_parameter1D('Delta', 0.001, 15, steps=100)
+    #constants['Main Folder Name'] = 'Delta3'
+    #constants['K'] = 3
+    #run_parameter1D('Delta', 0.001, 15, steps=100)
+    #constants['Main Folder Name'] = 'Delta4'
+    #constants['K'] = 4
+    #run_parameter1D('Delta', 0.001, 15, steps=100)
+    #constants['Main Folder Name'] = 'Delta5'
+    #constants['K'] = 5
+    #run_parameter1D('Delta', 0.001, 15, steps=100)
+    

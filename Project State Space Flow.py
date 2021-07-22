@@ -329,7 +329,7 @@ if __name__ == '__main__':
                 'IR': 6, 'IT': np.pi / 4, 'IP': 0, 
                 'IV': 0, 'IOT': 0, 'IOP': 1, 
                 'D': 0, 'K': 1, 'ER': 1, 'FR': .1, 'f': 10, 'Delta': .1,
-                'M1': 2, 'M2': 2,
+                'M1': 2, 'M2': 2, 
                 'Settings': [False,          False,               False]}
                           # [Plot Lissajous, Plot Radius and Phi, Saves Multiple Variables]
 
@@ -345,8 +345,19 @@ if __name__ == '__main__':
     # Change any parameters that you want different from above
     # run_parameter1D
     # 
-    constants['Main Folder Name'] = 'f2'
-    run_parameter1D('f', 100000000, 100000000000, steps=100)
+    amu = 1.6e-27
+    order_of_f = 1e14
+    angstrom = 1e-10
+    approx_spring_const = .36
+    
+    #constants['M1'] = 200000 * amu
+    #constants['M2'] = 200000 * amu
+    #constants['IR'] = 6 * angstrom
+    #constants['ER'] = 1 * angstrom
+    #constants['K'] = 1 * approx_spring_const
+
+    constants['Main Folder Name'] = 'f3'
+    run_parameter1D('f', 0.00000000001, .001, steps=10)
     #constants['Main Folder Name'] = 'Delta2'
     #constants['K'] = 2
     #run_parameter1D('Delta', 0.001, 15, steps=100)

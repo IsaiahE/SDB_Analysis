@@ -66,7 +66,7 @@ def main(constants):
         dr = v
         dtheta = omega_theta
         dphi = omega_phi
-        dv = r * omega_theta ** 2 + r * np.sin(theta) ** 2 * omega_phi ** 2 - 2 * k * (r - r_e) / mu - 2 * delta * (r - r_e)*2 - alpha * abs(v) / mu
+        dv = r * omega_theta ** 2 + r * np.sin(theta) ** 2 * omega_phi ** 2 - 2 * k * (r - r_e) / mu - (delta / mu) * (r - r_e)**2 - alpha * abs(v) / mu
         domega_theta = np.sin(theta) * np.cos(theta) * omega_phi ** 2 - 2 * v * omega_theta / r + D_theta / (r ** 2 * mu) - beta * abs(omega_theta) / (r ** 2 * mu)
         domega_phi = -2 * omega_theta * omega_phi * np.cos(theta) / np.sin(theta) - 2 * v * omega_phi / r - gamma * abs(omega_phi) / (r ** 2 * mu) + torque_z / (mu * r ** 2 * np.sin(theta) ** 2)
         return [dr, dtheta, dphi, dv, domega_theta, domega_phi]
@@ -74,7 +74,7 @@ def main(constants):
     # Solve ODE
     s_0 = [r_0, theta_0, phi_0, v_0, omega_theta_0, omega_phi_0]
     time = np.linspace(0, 5000, 100000)
-    solution = integrate.odeint(model, s_0, time)
+    solution = integrate.odeint(model, s_0, time, rtol=1.49012e-10, atol=1.49012e-10)
 
     # Form Solutions
     r_s = solution[:, 0]
@@ -328,7 +328,7 @@ if __name__ == '__main__':
     constants = {'Main Folder Name': '', 'DataName': 'FR', 'DataName2': 'IOP',
                 'IR': 6, 'IT': np.pi / 4, 'IP': 0, 
                 'IV': 0, 'IOT': 0, 'IOP': 1, 
-                'D': 0, 'K': 1, 'ER': 1, 'FR': .1, 'f': 10, 'Delta': .1,
+                'D': 0, 'K': 10, 'ER': 1, 'FR': .05, 'f': 100, 'Delta': .05,
                 'M1': 2, 'M2': 2, 
                 'Settings': [False,          False,               False]}
                           # [Plot Lissajous, Plot Radius and Phi, Saves Multiple Variables]
@@ -356,8 +356,8 @@ if __name__ == '__main__':
     #constants['ER'] = 1 * angstrom
     #constants['K'] = 1 * approx_spring_const
 
-    constants['Main Folder Name'] = 'f3'
-    run_parameter1D('f', 0.00000000001, .001, steps=10)
+    constants['Main Folder Name'] = 'FR3'
+    run_parameter1D('FR', 0.0001, 5, steps=100)
     #constants['Main Folder Name'] = 'Delta2'
     #constants['K'] = 2
     #run_parameter1D('Delta', 0.001, 15, steps=100)

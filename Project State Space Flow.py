@@ -68,7 +68,7 @@ def main(constants):
         dphi = omega_phi
         dv = r * omega_theta ** 2 + r * np.sin(theta) ** 2 * omega_phi ** 2 - 2 * k * (r - r_e) / mu - (delta / mu) * (r - r_e)**2 - alpha * abs(v) / mu
         domega_theta = np.sin(theta) * np.cos(theta) * omega_phi ** 2 - 2 * v * omega_theta / r + D_theta / (r ** 2 * mu) - beta * abs(omega_theta) / (r ** 2 * mu)
-        domega_phi = -2 * omega_theta * omega_phi * np.cos(theta) / np.sin(theta) - 2 * v * omega_phi / r - gamma * abs(omega_phi) / (r ** 2 * mu) + torque_z / (mu * r ** 2 * np.sin(theta) ** 2)
+        domega_phi = -2 * omega_theta * omega_phi * np.cos(theta) / np.sin(theta) - 2 * v * omega_phi / r - gamma * abs(omega_phi) / (r ** 2 * mu * np.sin(theta) ** 2) + torque_z / (mu * r ** 2 * np.sin(theta) ** 2)
         return [dr, dtheta, dphi, dv, domega_theta, domega_phi]
 
     # Solve ODE

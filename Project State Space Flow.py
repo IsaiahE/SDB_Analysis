@@ -356,7 +356,7 @@ if __name__ == '__main__':
     #constants['ER'] = 1 * angstrom
     #constants['K'] = 1 * approx_spring_const
 
-    constants['Main Folder Name'] = 'FR3'
+    constants['Main Folder Name'] = 'Trash'
     run_parameter1D('FR', 0.0001, 5, steps=100)
     #constants['Main Folder Name'] = 'Delta2'
     #constants['K'] = 2
